@@ -1,21 +1,23 @@
 {
-  "name": "javascript-action",
-  "description": "GitHub Actions JavaScript Template",
-  "version": "0.0.0",
+  "name": "poetrelease",
+  "description": "Github Action for automatic semantic versioning and releases with Poetry",
+  "version": "1.0.0",
   "author": "",
   "private": true,
-  "homepage": "https://github.com/actions/javascript-action#readme",
+  "homepage": "https://github.com/corentin-regent/poetrelease",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/actions/javascript-action.git"
+    "url": "git+https://github.com/corentin-regent/poetrelease.git"
   },
   "bugs": {
-    "url": "https://github.com/actions/javascript-action/issues"
+    "url": "https://github.com/corentin-regent/poetrelease/issues"
   },
   "keywords": [
     "GitHub",
     "Actions",
-    "JavaScript"
+    "Poetry",
+    "Release",
+    "Semver"
   ],
   "exports": {
     ".": "./dist/index.js"
