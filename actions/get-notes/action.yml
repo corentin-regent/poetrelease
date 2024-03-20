@@ -1,0 +1,15 @@
+name: Get release notes
+description: Get the description of the changes to release
+
+inputs:
+  changelog:
+    description: The path to the Changelog file
+    required: true
+
+outputs:
+  notes:
+    description: The notes for the version to release
+
+runs:
+  using: node20
+  main: dist/get-notes/index.js

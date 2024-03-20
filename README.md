@@ -1,24 +1,88 @@
-# Poetrelease
+# Poetrel
 
 [![CI](https://github.com/corentin-regent/poetrelease/actions/workflows/ci.yml/badge.svg)](https://github.com/corentin-regent/poetrelease/actions/workflows/ci.yml)
-[![Lint](https://github.com/corentin-regent/poetrelease/actions/workflows/linter.yml/badge.svg)](https://github.com/corentin-regent/poetrelease/actions/workflows/linter.yml)
-![Coverage](https://raw.githubusercontent.com/corentin-regent/poetrelease/main/badges/coverage.svg)
 
-Poetrelease is a GitHub Action that automates releases
-for [Poetry](https://python-poetry.org/) projects,
-using [Semantic Versioning](https://semver.org/).
+Poetrel is a GitHub Action that automates GitHub releases for [Poetry](https://python-poetry.org/)
+projects.
 
-It is a Javascript action, which supports any operating system.
-
-## Features
-
-* Bump the project version according to the commit tag
-* Deploy the project to PyPI
-* Create a GitHub release, describing the changes
-  as detailed in the project Changelog
-* Update the project Changelog to specify the newly released version,
-  and prepare it for the next changes
+Any operating system is supported.
 
 ## Usage
 
-Supported tags are listed in [the Poetry documentation](https://python-poetry.org/docs/cli/#version).
+Before merging a pull request on your main branch, you can set a `poetrel:` label to this PR, for
+Poetrel to bump the project version accordingly, update the project Changelog, and create a GitHub
+release describing the changes as detailed in the Changelog.
+
+Here are some example labels that you may use:
+
+![Poetrel Major](https://img.shields.io/badge/poetrel:major-red)
+![Poetrel Prerelease Next Phase](https://img.shields.io/badge/poetrel:prerelease_----next--phase-slateblue)
+
+Supported actions are listed in
+[the Poetry documentation](https://python-poetry.org/docs/cli/#version).
+
+Alternatively, you can tell Poetrel make a release without updating the `pyproject.toml` version, by
+using the following label:
+
+![Poetrel No Bump](https://img.shields.io/badge/poetrel:no--bump-darkgreen)
+
+It can be useful if you are preparing the first release of your project for example.
+
+Here is how you can integrate Poetrel in your workflow:
+
+```yaml
+name: Release
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+
+    permissions:
+      # Give the GITHUB_TOKEN write permission to commit
+      # and push the updated Changelog to the repository
+      contents: write
+
+    steps:
+      - name: Checkout project
+        uses: actions/checkout@v4
+
+      - name: Release project
+        uses: corentin-regent/poetrel@v1
+        with:
+          changelog: CHANGELOG.md
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+```
+
+> [!NOTE]  
+> The Poetrel action will fail if the commit that triggered the workflow did not originate from a PR
+> with a `poetrel:` label.
+
+## Inputs
+
+Here is the reference of supported inputs:
+
+```yaml
+inputs:
+  changelog:
+    description: The path to the Changelog file
+    required: true
+  commit-prefix:
+    description: The message to display before the version in the commit message
+    required: false
+    default: 'Release '
+  github-token:
+    description: The repository token (secrets.GITHUB_TOKEN)
+    required: true
+  setup-poetry:
+    description: Whether Poetrel should setup Python and Poetry
+    required: false
+    default: 'true'
+```
+
+You can choose to setup Python and Poetry yourself in your workflow, and pass `setup-poetry: false`
+as an argument to Poetrel.

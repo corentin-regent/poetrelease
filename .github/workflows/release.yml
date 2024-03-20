@@ -1,0 +1,45 @@
+name: Release
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: The new version to release (without the 'v')
+        type: string
+        required: true
+
+jobs:
+  release:
+    name: Release
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Get release notes
+        id: get-notes
+        uses: ./actions/get-notes
+        with:
+          changelog: CHANGELOG.md
+
+      - name: Write new version to Changelog
+        uses: ./actions/write-version
+        with:
+          changelog: CHANGELOG.md
+          version: v${{ inputs.version }}
+
+      - name: Commit changes
+        shell: bash
+        run: |
+          git add CHANGELOG.md
+          git commit -m 'Release ${{ inputs.version }}'
+          git push
+
+      - name: Create a GitHub release
+        shell: bash
+        run: |
+          mk_release='gh release create '\''v${{ inputs.version }}'\'' --notes '\''${{ steps.get-notes.outputs.notes }}'\'''
+          [[ '${{ inputs.version }}'' =~ [a-z] ]] && $mk_release --prerelease || $mk_release

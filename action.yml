@@ -1,19 +1,70 @@
-name: 'The name of your action here'
-description: 'Provide a description here'
-author: 'Your name or organization here'
+name: Poetrel
+description: Github Action for automatic semantic versioning and releases with Poetry
 
-# Define your inputs here.
 inputs:
-  milliseconds:
-    description: 'Your input description here'
+  changelog:
+    description: The path to the Changelog file
     required: true
-    default: '1000'
-
-# Define your outputs here.
-outputs:
-  time:
-    description: 'Your output description here'
+  commit-prefix:
+    description: The message to display before the version in the commit message
+    required: false
+    default: 'Release '
+  github-token:
+    description: The repository token (secrets.GITHUB_TOKEN)
+    required: true
+  setup-poetry:
+    description: Whether Poetrel should setup Python and Poetry
+    required: false
+    default: 'true'
 
 runs:
-  using: node20
-  main: dist/index.js
+  using: composite
+  steps:
+    - name: Get pull request label
+      id: get-label
+      uses: ./actions/get-label
+      with:
+        github-token: ${{ inputs.github-token }}
+
+    - name: Get release notes
+      id: get-notes
+      uses: ./actions/get-notes
+      with:
+        changelog: ${{ inputs.changelog }}
+
+    - name: Setup Python
+      if: ${{ input.setup-poetry == 'true' }}
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.12'
+
+    - name: Install Poetry
+      if: ${{ input.setup-poetry == 'true' }}
+      uses: snok/install-poetry@v1
+
+    - name: Bump project version
+      if: ${{ steps.get-label.outputs.action != 'no-bump' }}
+      id: version
+      shell: bash
+      run: |
+        poetry version ${{ steps.get-label.outputs.action }}
+        echo "new-version=$(poetry version -s)" >> $GITHUB_OUTPUT
+
+    - name: Write new version to Changelog
+      uses: ./actions/write-version
+      with:
+        changelog: ${{ inputs.changelog }}
+        version: ${{ steps.version.outputs.new-version }}
+
+    - name: Commit changes
+      shell: bash
+      run: |
+        git add '${{ inputs.changelog }}' pyproject.toml
+        git commit -m '${{ inputs.commit-prefix }}${{ steps.get-version.outputs.new-version }}'
+        git push
+
+    - name: Create a GitHub release
+      shell: bash
+      run: |
+        mk_release='gh release create '\''v${{ steps.get-version.outputs.new-version }}'\'' --notes '\''${{ steps.get-notes.outputs.notes }}'\'''
+        [[ '${{ steps.get-label.outputs.is-prerelease }}' -eq "true" ]] && $mk_release --prerelease || $mk_release

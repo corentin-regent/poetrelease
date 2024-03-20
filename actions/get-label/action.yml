@@ -1,0 +1,17 @@
+name: Get label
+description: Extract the label of the pull request, if any matches
+
+inputs:
+  github-token:
+    description: The repository token (secrets.GITHUB_TOKEN)
+    required: true
+
+outputs:
+  action:
+    description: The Poetry action specified by the PR label
+  is-prerelease:
+    description: Whether the version to release is a pre-release version
+
+runs:
+  using: node20
+  main: dist/get-label/index.js

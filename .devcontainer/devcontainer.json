@@ -12,11 +12,8 @@
         "davidanson.vscode-markdownlint",
         "dbaeumer.vscode-eslint",
         "esbenp.prettier-vscode",
-        "github.copilot",
-        "github.copilot-chat",
         "github.vscode-github-actions",
-        "github.vscode-pull-request-github",
-        "me-dutour-mathieu.vscode-github-actions",
+        "orta.vscode-jest",
         "redhat.vscode-yaml",
         "rvest.vs-code-prettier-eslint",
         "yzhang.markdown-all-in-one"
@@ -25,6 +22,7 @@
         "editor.defaultFormatter": "esbenp.prettier-vscode",
         "editor.tabSize": 2,
         "editor.formatOnSave": true,
+        "jest.runMode": "on-demand",
         "markdown.extension.list.indentationSize": "adaptive",
         "markdown.extension.italic.indicator": "_",
         "markdown.extension.orderedList.marker": "one"
