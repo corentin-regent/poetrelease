@@ -44,7 +44,7 @@ jobs:
 
     permissions:
       # Give the GITHUB_TOKEN write permission to commit
-      # and push the updated Changelog to the repository
+      # and push the updated Changelog and pyproject.toml
       contents: write
 
     steps:
