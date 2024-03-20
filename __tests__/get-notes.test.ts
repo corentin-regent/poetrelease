@@ -4,7 +4,7 @@ import getNotes from '../src/get-notes'
 import { inputFile, iterResourceDir, supportedExtensions } from './helpers'
 
 const getInputMock = jest.spyOn(core, 'getInput')
-const setFailedMock = jest.spyOn(core, 'setFailed')
+const setFailedMock = jest.spyOn(core, 'setFailed').mockImplementation(() => {})
 const setOutputMock = jest.spyOn(core, 'setOutput')
 
 function mockInputChangelog(path: string, extension: string) {
