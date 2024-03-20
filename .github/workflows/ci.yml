@@ -33,11 +33,9 @@ jobs:
         run: npm run format
 
       - name: Commit changes
-        run: |
-          if [ "$(git status -s)" ]; then
-            git commit -am "Format codebase"
-            git push
-          fi
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: Format codebase
 
   lint:
     name: Lint
@@ -94,12 +92,10 @@ jobs:
         run: npm run package
 
       - name: Commit dist/
-        run: |
-          if [ "$(git status -s | grep dist/)" ]; then
-            git add -f dist/\*
-            git commit -m "Build dist/"
-            git push
-          fi
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: Build dist/
+          file_pattern: dist/**
 
   test:
     name: Test

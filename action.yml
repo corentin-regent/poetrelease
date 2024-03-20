@@ -57,11 +57,10 @@ runs:
         version: ${{ steps.version.outputs.new-version }}
 
     - name: Commit changes
-      shell: bash
-      run: |
-        git add '${{ inputs.changelog }}' pyproject.toml
-        git commit -m '${{ inputs.commit-prefix }}${{ steps.get-version.outputs.new-version }}'
-        git push
+      uses: stefanzweifel/git-auto-commit-action@v5
+      with:
+        commit_message: ${{ inputs.commit-prefix }}${{ steps.get-version.outputs.new-version }}
+        file_pattern: ${{ inputs.changelog }} pyproject.toml
 
     - name: Create a GitHub release
       shell: bash
