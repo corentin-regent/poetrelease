@@ -62,6 +62,18 @@ jobs:
 > The Poetrel action will fail if the commit that triggered the workflow did not originate from a PR
 > with a `poetrel:` label.
 
+## Changelog format
+
+Poetrel supports both the Markdown format and the reStructuredText format for the Changelog file
+(inferred from the file extension).
+
+All you have to do is list your changes in an `Unreleased` section, and Poetrel will handle adding
+the versions to the Changelog each time the project is released. You can take a look at
+[this project's Changelog](/CHANGELOG.md)'s history to see it in action for a Markdown file.
+
+The content of this `Unreleased` section is used as the description of the GitHub release that is
+created.
+
 ## Inputs
 
 Here is the reference of supported inputs:
