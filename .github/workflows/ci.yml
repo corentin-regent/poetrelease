@@ -34,7 +34,7 @@ jobs:
 
       - name: Commit changes
         run: |
-          if [ "$(git diff --ignore-space-at-eol | wc -l)" -gt 0 ]; then
+          if [ "$(git status -s)" ]; then
             git commit -am "Format codebase"
             git push
           fi
@@ -95,7 +95,7 @@ jobs:
 
       - name: Commit dist/
         run: |
-          if [ "$(git diff --ignore-space-at-eol --text dist/ | wc -l)" -gt 0 ]; then
+          if [ "$(git status -s | grep dist/)" ]; then
             git add -f dist/\*
             git commit -m "Build dist/"
             git push
