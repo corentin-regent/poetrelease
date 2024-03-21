@@ -20,3 +20,4 @@ runs:
           $mk_release --prerelease
         else
           $mk_release
+        fi
