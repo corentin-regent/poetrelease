@@ -46,3 +46,4 @@ jobs:
         with:
           version: ${{ inputs.version }}
           notes: ${{ steps.get-notes.outputs.notes }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}

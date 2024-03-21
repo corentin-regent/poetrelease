@@ -67,3 +67,4 @@ runs:
       with:
         version: ${{ steps.get-version.outputs.new-version }}
         notes: ${{ steps.get-notes.outputs.notes }}
+        github-token: ${{ inputs.github-token }}

@@ -2,6 +2,9 @@ name: Release
 description: Create a GitHub Release
 
 inputs:
+  github-token:
+    description: The repository token (secrets.GITHUB_TOKEN)
+    required: true
   notes:
     description: The release notes
     required: true
@@ -21,3 +24,5 @@ runs:
         else
           $mk_release
         fi
+      env:
+        GH_TOKEN: ${{ inputs.github-token }}
