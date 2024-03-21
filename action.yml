@@ -44,11 +44,13 @@ runs:
 
     - name: Bump project version
       if: ${{ steps.get-label.outputs.action != 'no-bump' }}
-      id: version
       shell: bash
-      run: |
-        poetry version ${{ steps.get-label.outputs.action }}
-        echo "new-version=$(poetry version -s)" >> $GITHUB_OUTPUT
+      run: poetry version ${{ steps.get-label.outputs.action }}
+
+    - name: Get new project version
+      id: get-version
+      shell: bash
+      run: echo "new-version=$(poetry version -s)" >> $GITHUB_OUTPUT
 
     - name: Write new version to Changelog
       uses: corentin-regent/poetrel/write-version@main
