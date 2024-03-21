@@ -29,7 +29,7 @@
   },
   "license": "MIT",
   "eslintConfig": {
-    "extends": "./.github/linters/.eslintrc.yml"
+    "extends": "./.eslintrc.yml"
   },
   "jest": {
     "clearMocks": true,
