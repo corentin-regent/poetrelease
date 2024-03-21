@@ -20,15 +20,18 @@ inputs:
 runs:
   using: composite
   steps:
+    - name: Check out repository
+      uses: actions/checkout@v4
+
     - name: Get pull request label
       id: get-label
-      uses: corentin-regent/poetrel/get-label@main
+      uses: ./get-label
       with:
         github-token: ${{ inputs.github-token }}
 
     - name: Get release notes
       id: get-notes
-      uses: corentin-regent/poetrel/get-notes@main
+      uses: ./get-notes
       with:
         changelog: ${{ inputs.changelog }}
 
@@ -40,7 +43,7 @@ runs:
 
     - name: Install Poetry
       if: ${{ inputs.setup-poetry == 'true' }}
-      uses: ${GITHUB_ACTION_PATH}/install-poetry
+      uses: snok/install-poetry@v1
 
     - name: Bump project version
       if: ${{ steps.get-label.outputs.action != 'no-bump' }}
@@ -53,7 +56,7 @@ runs:
       run: echo "new-version=$(poetry version -s)" >> $GITHUB_OUTPUT
 
     - name: Write new version to Changelog
-      uses: ${GITHUB_ACTION_PATH}/write-version
+      uses: ./write-version
       with:
         changelog: ${{ inputs.changelog }}
         version: ${{ steps.version.outputs.new-version }}
@@ -65,7 +68,7 @@ runs:
         file_pattern: ${{ inputs.changelog }} pyproject.toml
 
     - name: Create a GitHub release
-      uses: ${GITHUB_ACTION_PATH}/release
+      uses: ./release
       with:
         version: ${{ steps.get-version.outputs.new-version }}
         notes: ${{ steps.get-notes.outputs.notes }}
