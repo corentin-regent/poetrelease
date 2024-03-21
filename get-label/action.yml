@@ -12,4 +12,4 @@ outputs:
 
 runs:
   using: node20
-  main: dist/get-label/index.js
+  main: ../dist/get-label/index.js

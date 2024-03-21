@@ -11,4 +11,4 @@ inputs:
 
 runs:
   using: node20
-  main: dist/write-version/index.js
+  main: ../dist/write-version/index.js
