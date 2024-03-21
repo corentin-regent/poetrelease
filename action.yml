@@ -25,13 +25,13 @@ runs:
 
     - name: Get pull request label
       id: get-label
-      uses: ./get-label
+      uses: corentin-regent/poetrel/get-label@main
       with:
         github-token: ${{ inputs.github-token }}
 
     - name: Get release notes
       id: get-notes
-      uses: ./get-notes
+      uses: corentin-regent/poetrel/get-notes@main
       with:
         changelog: ${{ inputs.changelog }}
 
@@ -56,7 +56,7 @@ runs:
       run: echo "new-version=$(poetry version -s)" >> $GITHUB_OUTPUT
 
     - name: Write new version to Changelog
-      uses: ./write-version
+      uses: corentin-regent/poetrel/write-version@main
       with:
         changelog: ${{ inputs.changelog }}
         version: ${{ steps.version.outputs.new-version }}
@@ -68,7 +68,7 @@ runs:
         file_pattern: ${{ inputs.changelog }} pyproject.toml
 
     - name: Create a GitHub release
-      uses: ./release
+      uses: corentin-regent/poetrel/release@main
       with:
         version: ${{ steps.get-version.outputs.new-version }}
         notes: ${{ steps.get-notes.outputs.notes }}
