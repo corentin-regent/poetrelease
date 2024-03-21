@@ -128,5 +128,5 @@ inputs:
 You can choose to setup Python and Poetry yourself in your workflow, and pass `setup-poetry: false`
 as an argument to Poetrel.
 
-If you wish to override the commit message, make sure to still include `[skip actions]` in it if you
-would like Poetrel's commit not to trigger additional workflow runs.
+If you wish to override the commit message, make sure to still include `[skip actions]` if you would
+like Poetrel's commit not to trigger additional workflow runs.
