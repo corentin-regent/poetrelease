@@ -1,6 +1,7 @@
 # Poetrel
 
 [![CI](https://github.com/corentin-regent/poetrelease/actions/workflows/ci.yml/badge.svg)](https://github.com/corentin-regent/poetrelease/actions/workflows/ci.yml)
+[![CodeQL](https://github.com/corentin-regent/poetrelease/actions/workflows/codeql-analysis.yml/badge.svg)](https://github.com/corentin-regent/poetrelease/actions/workflows/codeql-analysis.yml)
 
 Poetrel is a GitHub Action that automates GitHub releases for [Poetry](https://python-poetry.org/)
 projects.
@@ -86,7 +87,7 @@ granting the permissions to the GITHUB_TOKEN will not suffice. Instead you will 
 [deploy keys](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/managing-deploy-keys#deploy-keys),
 or a service account.
 
-Here is how you would invoke Poetrel using a personal access token:
+Here is how you would use Poetrel using a personal access token:
 
 ```yaml
 steps:
