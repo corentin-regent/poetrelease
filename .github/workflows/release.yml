@@ -38,7 +38,7 @@ jobs:
         shell: bash
         run: |
           git add CHANGELOG.md
-          git commit -m 'Release ${{ inputs.version }}'
+          git commit -m '[skip actions] Release ${{ inputs.version }}'
           git push
 
       - name: Create a GitHub release
