@@ -33,13 +33,13 @@ runs:
         changelog: ${{ inputs.changelog }}
 
     - name: Setup Python
-      if: ${{ input.setup-poetry == 'true' }}
+      if: ${{ inputs.setup-poetry == 'true' }}
       uses: actions/setup-python@v5
       with:
         python-version: '3.12'
 
     - name: Install Poetry
-      if: ${{ input.setup-poetry == 'true' }}
+      if: ${{ inputs.setup-poetry == 'true' }}
       uses: snok/install-poetry@v1
 
     - name: Bump project version
