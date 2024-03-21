@@ -63,7 +63,7 @@ runs:
         file_pattern: ${{ inputs.changelog }} pyproject.toml
 
     - name: Create a GitHub release
-      shell: bash
-      run: |
-        mk_release='gh release create '\''v${{ steps.get-version.outputs.new-version }}'\'' --notes '\''${{ steps.get-notes.outputs.notes }}'\'''
-        [[ '${{ steps.get-label.outputs.is-prerelease }}' -eq "true" ]] && $mk_release --prerelease || $mk_release
+      uses: ./actions/release
+      with:
+        version: ${{ steps.get-version.outputs.new-version }}
+        notes: ${{ steps.get-notes.outputs.notes }}

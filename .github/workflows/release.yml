@@ -42,7 +42,7 @@ jobs:
           git push
 
       - name: Create a GitHub release
-        shell: bash
-        run: |
-          mk_release='gh release create '\''v${{ inputs.version }}'\'' --notes '\''${{ steps.get-notes.outputs.notes }}'\'''
-          [[ '${{ inputs.version }}'' =~ [a-z] ]] && $mk_release --prerelease || $mk_release
+        uses: ./actions/release
+        with:
+          version: ${{ inputs.version }}
+          notes: ${{ steps.get-notes.outputs.notes }}

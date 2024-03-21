@@ -1,0 +1,22 @@
+name: Release
+description: Create a GitHub Release
+
+inputs:
+  notes:
+    description: The release notes
+    required: true
+  version:
+    description: The version to release
+    required: true
+
+runs:
+  using: composite
+  steps:
+    - name: Create a GitHub release
+      shell: bash
+      run: |
+        mk_release='gh release create '\''v${{ inputs.version }}'\'' --notes '\''${{ inputs.notes }}'\'''
+        if [[ '${{ inputs.version }}' =~ [a-z] ]]; then
+          $mk_release --prerelease
+        else
+          $mk_release

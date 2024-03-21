@@ -31,10 +31,8 @@ export default async function getLabel() {
       throw new Error('Only one Poetrel label must be used')
     }
 
-    const action = labels[0].slice(labelPrefix.length).trim()
-    const isPrerelease = action.startsWith('pre')
-    setOutput('action', action)
-    setOutput('is-prerelease', isPrerelease)
+    const [label] = labels[0]
+    setOutput('action', label.slice(labelPrefix.length).trim())
   } catch (error) {
     setFailed(error.message)
   }
