@@ -15,16 +15,16 @@ release describing the changes as detailed in the Changelog.
 
 Here are some example labels that you may use:
 
-![Poetrel Major](https://img.shields.io/badge/poetrel:major-red)
-![Poetrel Prerelease Next Phase](https://img.shields.io/badge/poetrel:prerelease_----next--phase-slateblue)
+![poetrel:major](https://img.shields.io/badge/poetrel:major-red)
+![poetrel:prerelease --next-phase](https://img.shields.io/badge/poetrel:prerelease_----next--phase-slateblue)
 
 Supported actions are listed in
 [the Poetry documentation](https://python-poetry.org/docs/cli/#version).
 
-Alternatively, you can tell Poetrel make a release without updating the `pyproject.toml` version, by
-using the following label:
+Alternatively, you can specify Poetrel to create a release without updating the `pyproject.toml`
+version, by using the following label:
 
-![Poetrel No Bump](https://img.shields.io/badge/poetrel:no--bump-darkgreen)
+![poetrel:no-bump](https://img.shields.io/badge/poetrel:no--bump-darkgreen)
 
 It can be useful if you are preparing the first release of your project for example.
 
@@ -74,6 +74,34 @@ the versions to the Changelog each time the project is released. You can take a 
 The content of this `Unreleased` section is used as the description of the GitHub release that is
 created.
 
+## Protected branches
+
+Poetrel needs `contents: write` permissions on your main branch in order to push the modified
+Changelog and pyproject.toml.
+
+If your main branch is
+[protected](https://docs.github.com/repositories/configuring-branches-and-merges-in-your-repository/managing-protected-branches/about-protected-branches),
+granting the permissions to the GITHUB_TOKEN will not suffice. Instead you will need to use either a
+[personal access token](https://docs.github.com/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens),
+[deploy keys](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/managing-deploy-keys#deploy-keys),
+or a service account.
+
+Here is how you would invoke Poetrel using a personal access token:
+
+```yaml
+steps:
+  - name: Check out repository
+    uses: actions/checkout@v4
+    with:
+      token: ${{ secrets.PAT }}
+
+  - name: Release project
+    uses: corentin-regent/poetrel@v1
+    with:
+      changelog: CHANGELOG.md
+      github-token: ${{ secrets.GITHUB_TOKEN }}
+```
+
 ## Inputs
 
 Here is the reference of supported inputs:
@@ -86,7 +114,7 @@ inputs:
   commit-prefix:
     description: The message to display before the version in the commit message
     required: false
-    default: 'Release '
+    default: '[skip actions] Release '
   github-token:
     description: The repository token (secrets.GITHUB_TOKEN)
     required: true
@@ -98,3 +126,6 @@ inputs:
 
 You can choose to setup Python and Poetry yourself in your workflow, and pass `setup-poetry: false`
 as an argument to Poetrel.
+
+If you wish to override the commit message, make sure to still include `[skip actions]` in it if you
+would like Poetrel's commit not to trigger additional workflow runs.

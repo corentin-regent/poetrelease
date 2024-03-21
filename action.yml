@@ -8,7 +8,7 @@ inputs:
   commit-prefix:
     description: The message to display before the version in the commit message
     required: false
-    default: 'Release '
+    default: '[skip actions] Release '
   github-token:
     description: The repository token (secrets.GITHUB_TOKEN)
     required: true
