@@ -40,7 +40,7 @@ runs:
 
     - name: Install Poetry
       if: ${{ inputs.setup-poetry == 'true' }}
-      uses: snok/install-poetry@v1
+      uses: ${GITHUB_ACTION_PATH}/install-poetry
 
     - name: Bump project version
       if: ${{ steps.get-label.outputs.action != 'no-bump' }}
@@ -53,7 +53,7 @@ runs:
       run: echo "new-version=$(poetry version -s)" >> $GITHUB_OUTPUT
 
     - name: Write new version to Changelog
-      uses: corentin-regent/poetrel/write-version@main
+      uses: ${GITHUB_ACTION_PATH}/write-version
       with:
         changelog: ${{ inputs.changelog }}
         version: ${{ steps.version.outputs.new-version }}
@@ -65,7 +65,7 @@ runs:
         file_pattern: ${{ inputs.changelog }} pyproject.toml
 
     - name: Create a GitHub release
-      uses: corentin-regent/poetrel/release@main
+      uses: ${GITHUB_ACTION_PATH}/release
       with:
         version: ${{ steps.get-version.outputs.new-version }}
         notes: ${{ steps.get-notes.outputs.notes }}

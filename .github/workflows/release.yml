@@ -24,12 +24,12 @@ jobs:
 
       - name: Get release notes
         id: get-notes
-        uses: corentin-regent/poetrel/get-notes@main
+        uses: ./get-notes
         with:
           changelog: CHANGELOG.md
 
       - name: Write new version to Changelog
-        uses: corentin-regent/poetrel/write-version@main
+        uses: ./write-version
         with:
           changelog: CHANGELOG.md
           version: v${{ inputs.version }}
@@ -42,7 +42,7 @@ jobs:
           git push
 
       - name: Create a GitHub release
-        uses: corentin-regent/poetrel/release@main
+        uses: ./release
         with:
           version: ${{ inputs.version }}
           notes: ${{ steps.get-notes.outputs.notes }}
