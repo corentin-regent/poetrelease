@@ -6,8 +6,6 @@
 Poetrel is a GitHub Action that automates GitHub releases for [Poetry](https://python-poetry.org/)
 projects.
 
-Any operating system is supported.
-
 ## Usage
 
 Before merging a pull request on your main branch, you can set a `poetrel:` label to this PR, for
