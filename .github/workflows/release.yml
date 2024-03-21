@@ -24,12 +24,12 @@ jobs:
 
       - name: Get release notes
         id: get-notes
-        uses: ./actions/get-notes
+        uses: ./get-notes
         with:
           changelog: CHANGELOG.md
 
       - name: Write new version to Changelog
-        uses: ./actions/write-version
+        uses: ./write-version
         with:
           changelog: CHANGELOG.md
           version: v${{ inputs.version }}
@@ -42,7 +42,7 @@ jobs:
           git push
 
       - name: Create a GitHub release
-        uses: ./actions/release
+        uses: ./release
         with:
           version: ${{ inputs.version }}
           notes: ${{ steps.get-notes.outputs.notes }}
