@@ -13,7 +13,7 @@ export default async function getLabel() {
     const response = await octokit.rest.repos.listPullRequestsAssociatedWithCommit(commit)
     debug(`GET pulls: ${JSON.stringify(response.data)}`)
     if (!response.data.length) {
-      throw new Error('No Pull Request found')
+      throw new Error(`Releases must originate from a Pull Request with a '${labelPrefix}' label`)
     }
     const [pullRequest] = response.data
 
@@ -22,7 +22,7 @@ export default async function getLabel() {
       .filter(name => name.startsWith(labelPrefix))
 
     if (!labels.length) {
-      throw new Error('No Poetrel label provided')
+      throw new Error(`No '${labelPrefix}' label provided`)
     }
     info(`Relevant labels: ${labels.join(' | ')}`)
     if (labels.length > 1) {
