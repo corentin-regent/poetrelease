@@ -1,4 +1,4 @@
-import { getInput, info, setFailed, setOutput } from '@actions/core'
+import { debug, getInput, info, setFailed, setOutput } from '@actions/core'
 import { context, getOctokit } from '@actions/github'
 
 const labelPrefix = 'poetrel:'
@@ -11,7 +11,7 @@ export default async function getLabel() {
     info(`Commit context: ${JSON.stringify(commit)}`)
 
     const response = await octokit.rest.repos.listPullRequestsAssociatedWithCommit(commit)
-    info(`GET pulls: ${JSON.stringify(response.data)}`)
+    debug(`GET pulls: ${JSON.stringify(response.data)}`)
     if (!response.data.length) {
       throw new Error('No Pull Request found')
     }
