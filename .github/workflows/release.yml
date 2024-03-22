@@ -19,7 +19,6 @@ jobs:
       - name: Check out repository
         uses: actions/checkout@v4
         with:
-          sparse-checkout: CHANGELOG.md
           token: ${{ secrets.PAT }}
 
       - name: Save release notes
@@ -34,12 +33,11 @@ jobs:
           changelog: CHANGELOG.md
           version: v${{ inputs.version }}
 
-      - name: Commit changes
-        shell: bash
-        run: |
-          git add CHANGELOG.md
-          git commit -m "[skip actions] Release ${{ inputs.version }}"
-          git push
+      - name: Commit Changelog
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: '[skip actions] Release ${{ inputs.version }}'
+          file_pattern: CHANGELOG.md
 
       - name: Create a GitHub release
         uses: ./release
