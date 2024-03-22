@@ -8,16 +8,16 @@ export default async function getLabel() {
     const token = getInput('github-token', { required: true })
     const octokit = getOctokit(token)
     const commit = { ...context.repo, commit_sha: context.sha }
-    info(`Commit context: ${commit}`)
+    info(`Commit context: ${JSON.stringify(commit)}`)
 
     const response = await octokit.rest.repos.listPullRequestsAssociatedWithCommit(commit)
-    info(`GET pulls: ${response.data}`)
+    info(`GET pulls: ${JSON.stringify(response.data)}`)
     if (!response.data.length) {
       throw new Error('No Pull Request found')
     }
 
     const [pullRequest] = response.data
-    info(`Retrieved PR: ${pullRequest}`)
+    info(`Retrieved PR: ${JSON.stringify(pullRequest)}`)
 
     const labels = pullRequest.labels
       .map(label => label.name.trim())
@@ -26,7 +26,7 @@ export default async function getLabel() {
     if (!labels.length) {
       throw new Error('No Poetrel label provided')
     }
-    info(`Relevant labels: ${labels}`)
+    info(`Relevant labels: ${labels.join(' | ')}`)
     if (labels.length > 1) {
       throw new Error('Only one Poetrel label must be used')
     }
