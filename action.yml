@@ -59,7 +59,7 @@ runs:
       uses: corentin-regent/poetrel/write-version@main
       with:
         changelog: ${{ inputs.changelog }}
-        version: ${{ steps.version.outputs.new-version }}
+        version: ${{ steps.get-version.outputs.new-version }}
 
     - name: Commit changes
       uses: stefanzweifel/git-auto-commit-action@v5
