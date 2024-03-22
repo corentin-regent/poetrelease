@@ -1,7 +1,6 @@
 # Poetrel
 
 [![CI](https://github.com/corentin-regent/poetrelease/actions/workflows/ci.yml/badge.svg)](https://github.com/corentin-regent/poetrelease/actions/workflows/ci.yml)
-[![CodeQL](https://github.com/corentin-regent/poetrelease/actions/workflows/codeql-analysis.yml/badge.svg)](https://github.com/corentin-regent/poetrelease/actions/workflows/codeql-analysis.yml)
 
 Poetrel is a GitHub Action that automates GitHub releases for [Poetry](https://python-poetry.org/)
 projects.
