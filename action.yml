@@ -73,3 +73,7 @@ runs:
         version: ${{ steps.get-version.outputs.new-version }}
         notes-file: .notes.txt
         github-token: ${{ inputs.github-token }}
+
+branding:
+  icon: 'chevrons-up'
+  color: 'green'
