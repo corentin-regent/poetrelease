@@ -15,9 +15,7 @@ export default async function getLabel() {
     if (!response.data.length) {
       throw new Error('No Pull Request found')
     }
-
     const [pullRequest] = response.data
-    info(`Retrieved PR: ${JSON.stringify(pullRequest)}`)
 
     const labels = pullRequest.labels
       .map(label => label.name.trim())
