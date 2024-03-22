@@ -29,8 +29,7 @@ export default async function getLabel() {
       throw new Error('Only one Poetrel label must be used')
     }
 
-    const [label] = labels[0]
-    setOutput('action', label.slice(labelPrefix.length).trim())
+    setOutput('action', labels[0].slice(labelPrefix.length).trim())
   } catch (error) {
     setFailed(error.message)
   }
