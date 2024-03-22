@@ -1,6 +1,6 @@
 import { readFileSync } from 'fs'
 import * as core from '@actions/core'
-import getNotes from '../src/get-notes'
+import getNotes from '../src/actions/get-notes'
 import { inputFile, iterResourceDir, supportedExtensions } from './helpers'
 
 const getInputMock = jest.spyOn(core, 'getInput')

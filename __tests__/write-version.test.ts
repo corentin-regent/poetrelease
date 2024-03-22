@@ -1,6 +1,6 @@
 import { cpSync, readFileSync, rmSync } from 'fs'
 import * as core from '@actions/core'
-import writeVersion from '../src/write-version'
+import writeVersion from '../src/actions/write-version'
 import { inputFile, iterResourceDir, resourceDir, supportedExtensions } from './helpers'
 
 const getInputMock = jest.spyOn(core, 'getInput')
