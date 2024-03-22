@@ -22,11 +22,11 @@ jobs:
           sparse-checkout: CHANGELOG.md
           token: ${{ secrets.PAT }}
 
-      - name: Get release notes
-        id: get-notes
-        uses: ./get-notes
+      - name: Save release notes
+        uses: ./save-notes
         with:
           changelog: CHANGELOG.md
+          notes-file: .notes.txt
 
       - name: Write new version to Changelog
         uses: ./write-version
@@ -38,12 +38,12 @@ jobs:
         shell: bash
         run: |
           git add CHANGELOG.md
-          git commit -m '[skip actions] Release ${{ inputs.version }}'
+          git commit -m "[skip actions] Release ${{ inputs.version }}"
           git push
 
       - name: Create a GitHub release
         uses: ./release
         with:
           version: ${{ inputs.version }}
-          notes: ${{ steps.get-notes.outputs.notes }}
+          notes-file: .notes.txt
           github-token: ${{ secrets.GITHUB_TOKEN }}

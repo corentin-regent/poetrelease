@@ -29,11 +29,11 @@ runs:
       with:
         github-token: ${{ inputs.github-token }}
 
-    - name: Get release notes
-      id: get-notes
-      uses: corentin-regent/poetrel/get-notes@main
+    - name: Save release notes
+      uses: corentin-regent/poetrel/save-notes@main
       with:
         changelog: ${{ inputs.changelog }}
+        notes-file: .notes.txt
 
     - name: Setup Python
       if: ${{ inputs.setup-poetry == 'true' }}
@@ -71,5 +71,5 @@ runs:
       uses: corentin-regent/poetrel/release@main
       with:
         version: ${{ steps.get-version.outputs.new-version }}
-        notes: ${{ steps.get-notes.outputs.notes }}
+        notes-file: .notes.txt
         github-token: ${{ inputs.github-token }}

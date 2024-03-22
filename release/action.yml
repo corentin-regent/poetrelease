@@ -5,8 +5,8 @@ inputs:
   github-token:
     description: The repository token (secrets.GITHUB_TOKEN)
     required: true
-  notes:
-    description: The release notes
+  notes-file:
+    description: The path to the release notes file
     required: true
   version:
     description: The version to release
@@ -18,7 +18,7 @@ runs:
     - name: Create a GitHub release
       shell: bash
       run: |
-        mk_release='gh release create v${{ inputs.version }} --title v${{ inputs.version }} --notes "${{ inputs.notes }}"'
+        mk_release='gh release create v${{ inputs.version }} --title v${{ inputs.version }} --notes-file "${{ inputs.notes-file }}"'
         if [[ '${{ inputs.version }}' =~ [a-z] ]]; then
           $mk_release --prerelease
         else
