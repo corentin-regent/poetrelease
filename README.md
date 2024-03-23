@@ -6,11 +6,16 @@
 Poetrel is a GitHub Action that automates GitHub releases for [Poetry](https://python-poetry.org/)
 projects.
 
+Poetrel also handles publishing the project to PyPI, if provided the `pypi-token` input.
+
 ## Usage
 
 Before merging a pull request on your main branch, you can set a `poetrel:` label to this PR, for
-Poetrel to bump the project version accordingly, update the project Changelog, and create a GitHub
-release describing the changes as detailed in the Changelog.
+Poetrel to:
+- Bump the project version accordingly
+- Update the project Changelog
+- Optionally publish the new version to PyPI
+- And create a GitHub release describing the changes as detailed in the Changelog
 
 Here are some example labels that you may use:
 
@@ -26,6 +31,10 @@ version, by using the following label:
 ![poetrel:no-bump](https://img.shields.io/badge/poetrel:no--bump-darkgreen)
 
 It can be useful if you are preparing the first release of your project for example.
+
+> [!NOTE]  
+> The Poetrel action will fail if the commit that triggered the workflow did not originate from a PR
+> with a `poetrel:` label.
 
 Here is how you can integrate Poetrel in your workflow:
 
@@ -55,11 +64,14 @@ jobs:
         with:
           changelog: CHANGELOG.md
           github-token: ${{ secrets.GITHUB_TOKEN }}
+          pypi-token: ${{ secrets.PYPI_TOKEN }}
 ```
 
-> [!NOTE]  
-> The Poetrel action will fail if the commit that triggered the workflow did not originate from a PR
-> with a `poetrel:` label.
+The `PYPI_TOKEN` secret can be generated [here](https://pypi.org/manage/account/#api-tokens)
+for your project and has to be added to your repository secrets in the GitHub settings.
+
+The `GITHUB_TOKEN` secret on the other hand is builtin, and is provided by GitHub
+without any action required.
 
 ## Changelog format
 
@@ -98,6 +110,7 @@ steps:
     with:
       changelog: CHANGELOG.md
       github-token: ${{ secrets.GITHUB_TOKEN }}
+      pypi-token: ${{ secrets.PYPI_TOKEN }}
 ```
 
 ## Inputs
@@ -116,6 +129,9 @@ inputs:
   github-token:
     description: The repository token (secrets.GITHUB_TOKEN)
     required: true
+  pypi-token:
+    description: The PyPI API token if you want to publish to PyPI
+    required: false
   setup-poetry:
     description: Whether Poetrel should setup Python and Poetry
     required: false

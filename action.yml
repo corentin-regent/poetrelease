@@ -1,5 +1,5 @@
 name: Poetrel
-description: Github Action for automatic semantic versioning and releases with Poetry
+description: Github Action for automatic releases with Poetry
 
 inputs:
   changelog:
@@ -12,6 +12,9 @@ inputs:
   github-token:
     description: The repository token (secrets.GITHUB_TOKEN)
     required: true
+  pypi-token:
+    description: The PyPI API token if you want to publish to PyPI
+    required: false
   setup-poetry:
     description: Whether Poetrel should setup Python and Poetry
     required: false
@@ -66,6 +69,13 @@ runs:
       with:
         commit_message: ${{ inputs.commit-prefix }}${{ steps.get-version.outputs.new-version }}
         file_pattern: ${{ inputs.changelog }} pyproject.toml
+
+    - name: Publish to PyPI
+      if: inputs.pypi-token
+      shell: bash
+      run: |
+        poetry config pypi-token.pypi ${{ inputs.pypi-token }}
+        poetry publish --build --no-interaction
 
     - name: Create a GitHub release
       uses: corentin-regent/poetrel/release@v1
