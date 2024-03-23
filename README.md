@@ -12,6 +12,7 @@ Poetrel also handles publishing the project to PyPI, if provided the `pypi-token
 
 Before merging a pull request on your main branch, you can set a `poetrel:` label to this PR, for
 Poetrel to:
+
 - Bump the project version accordingly
 - Update the project Changelog
 - Optionally publish the new version to PyPI
@@ -67,11 +68,11 @@ jobs:
           pypi-token: ${{ secrets.PYPI_TOKEN }}
 ```
 
-The `PYPI_TOKEN` secret can be generated [here](https://pypi.org/manage/account/#api-tokens)
-for your project and has to be added to your repository secrets in the GitHub settings.
+The `PYPI_TOKEN` secret can be generated [here](https://pypi.org/manage/account/#api-tokens) for
+your project and has to be added to your repository secrets in the GitHub settings.
 
-The `GITHUB_TOKEN` secret on the other hand is builtin, and is provided by GitHub
-without any action required.
+The `GITHUB_TOKEN` secret on the other hand is builtin, and is provided by GitHub without any action
+required.
 
 ## Changelog format
 
