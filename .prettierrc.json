@@ -5,12 +5,10 @@
   "semi": false,
   "singleQuote": true,
   "quoteProps": "as-needed",
-  "jsxSingleQuote": false,
   "trailingComma": "none",
   "bracketSpacing": true,
   "bracketSameLine": true,
   "arrowParens": "avoid",
   "proseWrap": "always",
-  "htmlWhitespaceSensitivity": "css",
   "endOfLine": "lf"
 }

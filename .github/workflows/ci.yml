@@ -5,11 +5,13 @@ on:
   push:
     paths:
       - '**.ts'
-      - 'eslintrc.yml'
       - 'package.json'
       - 'package.lock'
       - 'scripts/package.sh'
       - '.github/workflows/ci.yml'
+      - '.eslintignore'
+      - '.eslintrc.yml'
+      - '.prettierignore'
       - '.prettierrc.json'
 
 jobs:
