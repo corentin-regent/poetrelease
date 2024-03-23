@@ -85,5 +85,5 @@ runs:
         github-token: ${{ inputs.github-token }}
 
 branding:
-  icon: 'chevrons-up'
-  color: 'blue'
+  icon: chevrons-up
+  color: blue
