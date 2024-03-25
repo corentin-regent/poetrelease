@@ -87,7 +87,8 @@ created.
 
 ## Protected branches
 
-Poetrel needs `contents: write` permissions in order to push the modified Changelog and pyproject.toml.
+Poetrel needs `contents: write` permissions in order to push the modified Changelog and
+pyproject.toml.
 
 If your main branch is
 [protected](https://docs.github.com/repositories/configuring-branches-and-merges-in-your-repository/managing-protected-branches/about-protected-branches),
