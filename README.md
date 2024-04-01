@@ -167,6 +167,7 @@ jobs:
         uses: corentin-regent/poetrel/sync-labels@v1
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
+          owner: corentin-regent
 ```
 
 Here is the reference of supported inputs for this `sync-labels` action:
@@ -175,6 +176,9 @@ Here is the reference of supported inputs for this `sync-labels` action:
 inputs:
   github-token:
     description: The repository token (secrets.GITHUB_TOKEN)
+    required: true
+  owner:
+    description: The owner of your repository
     required: true
   setup-python:
     description: Whether Poetrel should setup Python

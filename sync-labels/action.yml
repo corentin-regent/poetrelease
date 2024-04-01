@@ -5,6 +5,9 @@ inputs:
   github-token:
     description: The repository token (secrets.GITHUB_TOKEN)
     required: true
+  owner:
+    description: The owner of your repository
+    required: true
   setup-python:
     description: Whether Poetrel should setup Python
     required: false
