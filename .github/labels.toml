@@ -33,7 +33,7 @@ color = "00ff00"
 name = "poetrel:prerelease"
 description = "Release a pre-release version"
 
-[poetrel:prerelease --next-phase]
+["poetrel:prerelease --next-phase"]
 color = "007f00"
 name = "poetrel:prerelease --next-phase"
 description = "Release a pre-release version with incremented phase"
