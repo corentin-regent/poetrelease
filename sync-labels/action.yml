@@ -26,6 +26,12 @@ runs:
       shell: bash
       run: pip install labels
 
+    - name: Fetch Poetrel labels file
+      shell: bash
+      run: # TODO: use main branch
+        curl https://raw.githubusercontent.com/corentin-regent/poetrel/develop/.github/labels.toml
+        -o .poetrel_labels.toml
+
     - name: Sync labels with GitHub
       shell: bash
-      run: labels -u ${{ inputs.owner }} -t ${{ inputs.github-token }} sync -f .github/labels.toml
+      run: labels -u ${{ inputs.owner }} -t ${{ inputs.github-token }} sync -f .poetrel_labels.toml
