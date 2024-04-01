@@ -34,4 +34,4 @@ runs:
 
     - name: Sync labels with GitHub
       shell: bash
-      run: labels -u ${{ inputs.owner }} -t ${{ inputs.github-token }} sync -f .poetrel_labels.toml
+      run: labels -o ${{ inputs.owner }} -t ${{ inputs.github-token }} sync -f .poetrel_labels.toml
