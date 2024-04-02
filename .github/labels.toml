@@ -1,34 +1,34 @@
-[poetrel:major]
+["poetrel:major"]
 color = "ff0000"
 name = "poetrel:major"
 description = "Release a new major version"
 
-[poetrel:minor]
+["poetrel:minor"]
 color = "ff7f00"
 name = "poetrel:minor"
 description = "Release a new minor version"
 
-[poetrel:patch]
+["poetrel:patch"]
 color = "ffff00"
 name = "poetrel:patch"
 description = "Release a new patch version"
 
-[poetrel:premajor]
+["poetrel:premajor"]
 color = "7f0000"
 name = "poetrel:premajor"
 description = "Release a pre-major version"
 
-[poetrel:preminor]
+["poetrel:preminor"]
 color = "7f3f00"
 name = "poetrel:preminor"
 description = "Release a pre-minor version"
 
-[poetrel:prepatch]
+["poetrel:prepatch"]
 color = "7f7f00"
 name = "poetrel:prepatch"
 description = "Release a pre-patch version"
 
-[poetrel:prerelease]
+["poetrel:prerelease"]
 color = "00ff00"
 name = "poetrel:prerelease"
 description = "Release a pre-release version"
@@ -38,7 +38,7 @@ color = "007f00"
 name = "poetrel:prerelease --next-phase"
 description = "Release a pre-release version with incremented phase"
 
-[poetrel:no-bump]
+["poetrel:no-bump"]
 color = "0000ff"
 name = "poetrel:no-bump"
 description = "Release without bumping the pyproject.toml version"
