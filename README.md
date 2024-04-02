@@ -162,7 +162,14 @@ on:
 jobs:
   sync:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      issues: write
+
     steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
       - name: Sync labels with GitHub
         uses: corentin-regent/poetrel/sync-labels@v1
         with:
