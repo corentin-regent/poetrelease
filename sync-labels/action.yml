@@ -26,7 +26,7 @@ runs:
     - name: Install labels
       shell: bash
       # TODO: simply do 'pip install labels' when this PR is merged and released:
-      # [PR link]
+      # https://github.com/hackebrot/labels/pull/38
       run: pip install https://github.com/corentin-regent/labels/archive/sync-multiple.zip
 
     - name: Fetch Poetrel labels file
