@@ -150,6 +150,20 @@ For the Poetrel labels to be maintainable in your repository, we offer a
 `corentin-regent/poetrel/sync-labels` action, which will synchronize your labels with the ones
 defined [here](/.github/labels.toml).
 
+In order to also keep your existing labels, you will need to list them in a `labels.toml` file in
+your repository. The [labels](https://github.com/hackebrot/labels) package can do this for you.
+
+You will only need to setup a
+[personal access token](https://docs.github.com/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens)
+with `issues: read` permissions, and fill in and run the following commands:
+
+```bash
+pip install labels
+export LABELS_USERNAME="<GITHUB_USERNAME>"
+export LABELS_TOKEN="<PERSONAL_ACCESS_TOKEN>"
+labels fetch -o <REPO_OWNER> -r <REPO_NAME> -f .github/labels.toml
+```
+
 Here is an example workflow that would synchronize your labels with Poetrel everyday:
 
 ```yaml
@@ -183,6 +197,10 @@ inputs:
   github-token:
     description: The repository token (secrets.GITHUB_TOKEN)
     required: true
+  labels-file:
+    description: The path to your own labels.toml file
+    required: false
+    default: .github/labels.toml
   setup-python:
     description: Whether Poetrel should setup Python
     required: false

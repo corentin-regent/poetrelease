@@ -5,6 +5,10 @@ inputs:
   github-token:
     description: The repository token (secrets.GITHUB_TOKEN)
     required: true
+  labels-file:
+    description: The path to your own labels.toml file
+    required: false
+    default: .github/labels.toml
   setup-python:
     description: Whether Poetrel should setup Python
     required: false
@@ -21,7 +25,9 @@ runs:
 
     - name: Install labels
       shell: bash
-      run: pip install labels
+      # TODO: simply do 'pip install labels' when this PR is merged and released:
+      # [PR link]
+      run: pip install https://github.com/corentin-regent/labels/archive/sync-multiple.zip
 
     - name: Fetch Poetrel labels file
       shell: bash
@@ -31,4 +37,6 @@ runs:
 
     - name: Sync labels with GitHub
       shell: bash
-      run: labels -u github-actions[bot] -t ${{ inputs.github-token }} sync -f .poetrel_labels.toml
+      run:
+        labels -u github-actions[bot] -t ${{ inputs.github-token }} sync -f ${{ inputs.labels-file}}
+        -f .poetrel_labels.toml
