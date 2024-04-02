@@ -148,7 +148,7 @@ like Poetrel's commit not to trigger additional workflow runs.
 
 For the Poetrel labels to be maintainable in your repository, we offer a
 `corentin-regent/poetrel/sync-labels` action, which will synchronize your labels with the ones
-defines [here](/.github/labels.toml).
+defined [here](/.github/labels.toml).
 
 Here is an example workflow that would synchronize your labels with Poetrel everyday:
 
