@@ -157,7 +157,7 @@ name: Synchronize Poetrel labels
 
 on:
   schedule:
-    - cron: '* * */1 * *' # once a day
+    - cron: '0 0 * * *' # once a day
 
 jobs:
   sync:
