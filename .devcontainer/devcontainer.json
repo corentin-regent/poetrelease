@@ -12,7 +12,6 @@
         "github.vscode-github-actions",
         "orta.vscode-jest",
         "redhat.vscode-yaml",
-        "rvest.vs-code-prettier-eslint",
         "yzhang.markdown-all-in-one"
       ],
       "settings": {
