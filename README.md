@@ -60,6 +60,8 @@ jobs:
     steps:
       - name: Checkout project
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - name: Release project
         uses: corentin-regent/poetrel@v1
@@ -105,6 +107,7 @@ steps:
   - name: Check out repository
     uses: actions/checkout@v4
     with:
+      fetch-depth: 0
       token: ${{ secrets.PAT }}
 
   - name: Release project
