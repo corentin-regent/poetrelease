@@ -190,19 +190,5 @@ jobs:
           github-token: ${{ secrets.GITHUB_TOKEN }}
 ```
 
-Here is the reference of supported inputs for this `sync-labels` action:
-
-```yaml
-inputs:
-  github-token:
-    description: The repository token (secrets.GITHUB_TOKEN)
-    required: true
-  labels-file:
-    description: The path to your own labels.toml file
-    required: false
-    default: .github/labels.toml
-  setup-python:
-    description: Whether Poetrel should setup Python
-    required: false
-    default: 'true'
-```
+See the [sync-labels/action.yml](/sync-labels/action.yml) file for a reference of all supported
+inputs.
