@@ -78,10 +78,10 @@ runs:
       env:
         commit-message: ${{ inputs.commit-prefix }}${{ steps.get-version.outputs.new-version }}
       run: |
-        git config user.name ${{ inputs.git-user }}
-        git config user.email ${{ inputs.git-email }}
-        git add ${{ inputs.changelog }} pyproject.toml
-        git commit -m ${{ env.commit-message }} --author ${{ inputs.git-author }}
+        git config user.name "${{ inputs.git-user }}"
+        git config user.email "${{ inputs.git-email }}"
+        git add "${{ inputs.changelog }}" pyproject.toml
+        git commit -m "${{ env.commit-message }}" --author "${{ inputs.git-author }}"
 
     - name: Publish to PyPI
       if: inputs.pypi-token
