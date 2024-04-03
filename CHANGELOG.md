@@ -2,11 +2,6 @@
 
 This project adheres to [Semantic Versioning 2.0](http://semver.org/).
 
-## Unreleased
-
-- Added a `sync-labels` action to synchronize the Poetrel labels with any GitHub repo
-- Setup Python with the latest version (3.x) if `setup-poetry` is true
-
 ## v1.1.1
 
 Fixed branch protection bypass by removing checkout in the action

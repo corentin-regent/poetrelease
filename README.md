@@ -8,6 +8,8 @@ projects.
 
 It can also handle publishing the project to PyPI, if provided the `pypi-token` input.
 
+As a composite action of Javascript actions, any OS is supported.
+
 ## Usage
 
 Before merging a pull request on your main branch, you can set a `poetrel:` label to this PR, for
@@ -115,31 +117,10 @@ steps:
 
 ## Inputs
 
-Here is the reference of supported inputs:
+See the [action.yml](/action.yml) file for a reference of all supported inputs.
 
-```yaml
-inputs:
-  changelog:
-    description: The path to the Changelog file
-    required: true
-  commit-prefix:
-    description: The message to display before the version in the commit message
-    required: false
-    default: '[skip actions] Release '
-  github-token:
-    description: The repository token (secrets.GITHUB_TOKEN)
-    required: true
-  pypi-token:
-    description: The PyPI API token if you want to publish to PyPI
-    required: false
-  setup-poetry:
-    description: Whether Poetrel should setup Python and Poetry
-    required: false
-    default: 'true'
-```
-
-You can choose to setup Python and Poetry yourself in your workflow, and pass `setup-poetry: false`
-as an argument to Poetrel.
+Notably, you can choose to setup Python and Poetry yourself in your workflow, and pass
+`setup-poetry: false` as an argument to Poetrel.
 
 If you wish to override the commit message, make sure to still include `[skip actions]` if you would
 like Poetrel's commit not to trigger additional workflow runs.
