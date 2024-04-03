@@ -11,6 +11,8 @@ It can also handle publishing the project to PyPI, if provided the `pypi-token` 
 
 As a composite action of Javascript actions, any OS is supported.
 
+As a composite action of Javascript actions, any OS is supported.
+
 ## Usage
 
 Before merging a pull request on your main branch, you can set a `poetrel:` label to this PR, for
