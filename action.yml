@@ -82,6 +82,7 @@ runs:
         git config user.email "${{ inputs.git-email }}"
         git add "${{ inputs.changelog }}" pyproject.toml
         git commit -m "${{ env.commit-message }}" --author "${{ inputs.git-author }}"
+        git push
 
     - name: Publish to PyPI
       if: inputs.pypi-token
