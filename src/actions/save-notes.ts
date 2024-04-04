@@ -2,7 +2,7 @@ import { writeFileSync } from 'fs'
 import { getInput, setFailed } from '@actions/core'
 import { mkHandler } from '../handlers'
 
-export default async function saveNotes() {
+export default function saveNotes() {
   try {
     const changelog = getInput('changelog', { required: true })
     const notesFile = getInput('notes-file', { required: true })

@@ -25,7 +25,7 @@
   "scripts": {
     "format": "npx prettier --write .",
     "package": "bash scripts/package.sh",
-    "test": "npx jest"
+    "test": "npx jest --runInBand"
   },
   "license": "MIT",
   "eslintConfig": {
