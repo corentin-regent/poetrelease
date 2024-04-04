@@ -1,0 +1,117 @@
+name: Release GitHub Action
+description: Github Action for automatic releases of a GitHub Action
+
+inputs:
+  changelog:
+    description: The path to the Changelog file
+    required: true
+  commit-prefix:
+    description: The message to display before the version in the commit message
+    required: false
+    default: '[skip actions] Release '
+  git-author:
+    description: Value used for the commit author
+    required: false
+    default: ${{ github.actor }} <${{ github.actor }}@users.noreply.github.com>
+  git-email:
+    description: Email address used for the commit user
+    required: false
+    default: 41898282+github-actions[bot]@users.noreply.github.com
+  git-user:
+    description: Name used for the commit user
+    required: false
+    default: github-actions[bot]
+  github-token:
+    description: The repository token (secrets.GITHUB_TOKEN)
+    required: true
+
+runs:
+  using: composite
+  steps:
+    - name: Get pull request label
+      id: get-label
+      uses: corentin-regent/poetrel/get-label@v1
+      with:
+        github-token: ${{ inputs.github-token }}
+
+    - name: Get old version
+      id: old-version
+      uses: corentin-regent/poetrel/get-version@v1
+      with:
+        changelog: ${{ inputs.changelog }}
+
+    - name: Save release notes
+      uses: corentin-regent/poetrel/save-notes@v1
+      with:
+        changelog: ${{ inputs.changelog }}
+        notes-file: .notes.txt
+
+    - name: Compute new project version
+      id: new-version
+      shell: bash
+      env:
+        old_version: ${{ steps.old-version.outputs.version }}
+        action: ${{ steps.get-label.outputs.action }}
+      run: |
+        get_part() {
+          echo $old_version | cut -d '.' -f $1
+        }
+        major=$(get_part 1)
+        minor=$(get_part 2)
+        patch=$(get_part 3)
+
+        case "$action" in
+          "major")
+            ((major++))
+            minor=0
+            patch=0
+            ;;
+          "minor")
+            ((minor++))
+            patch=0
+            ;;
+          "patch")
+            ((patch++))
+            ;;
+          *)
+            echo "Unsupported label 'poetrel:$action'. Please provide 'poetrel:major', 'poetrel:minor', or 'poetrel:patch'."
+            exit 1
+            ;;
+        esac
+
+        echo version="$major.$minor.$patch" >> $GITHUB_OUTPUT
+        echo major=$major >> $GITHUB_OUTPUT
+
+    - name: Write new version to Changelog
+      uses: corentin-regent/poetrel/write-version@v1
+      with:
+        changelog: ${{ inputs.changelog }}
+        version: ${{ steps.compute-version.outputs.new-version }}
+
+    - name: Commit Changelog
+      shell: bash
+      env:
+        commit_message: ${{ inputs.commit-prefix }}${{ steps.compute-version.outputs.new-version }}
+      run: |
+        git config user.name "${{ inputs.git-user }}"
+        git config user.email "${{ inputs.git-email }}"
+        git add "${{ inputs.changelog }}"
+        git commit -m "$commit_message" --author "${{ inputs.git-author }}"
+        git push
+
+    - name: Create a GitHub release
+      uses: corentin-regent/poetrel/release@v1
+      with:
+        version: ${{ steps.new-version.outputs.version }}
+        notes-file: .notes.txt
+        github-token: ${{ inputs.github-token }}
+
+    - name: Update major tag
+      shell: bash
+      env:
+        tag_name: v${{ steps.new-version.outputs.version }}
+      run: |
+        git fetch origin
+        git checkout $tag_name
+        git tag -f -a $tag_name -m "Release $tag_name"
+        git push origin -f $tag_name
