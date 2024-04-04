@@ -18,6 +18,10 @@ export default class MdHandler extends BaseHandler {
     return 0 < countHeadings(line) && countHeadings(line) <= this.headings
   }
 
+  protected override extractVersion(trimmedLine: string): string {
+    return trimmedLine.replace(/#?\s?/g, '')
+  }
+
   protected override mkHeader(version: string) {
     return `${'#'.repeat(this.headings)} ${version}`
   }
