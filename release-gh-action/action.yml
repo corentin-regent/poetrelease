@@ -54,7 +54,7 @@ runs:
         action: ${{ steps.get-label.outputs.action }}
       run: |
         get_part() {
-          echo "$old_version" | cut -d '.' -f $1
+          echo $old_version | cut -d '.' -f $1
         }
         major=$(get_part 1)
         minor=$(get_part 2)
@@ -62,16 +62,16 @@ runs:
 
         case "$action" in
           "major")
-            major=$((major + 1))
+            ((major++))
             minor=0
             patch=0
             ;;
           "minor")
-            minor=$((minor + 1))
+            ((minor++))
             patch=0
             ;;
           "patch")
-            patch=$((patch + 1))
+            ((patch++))
             ;;
           *)
             echo "Unsupported label 'poetrel:$action'. Please provide 'poetrel:major', 'poetrel:minor', or 'poetrel:patch'."
@@ -80,18 +80,18 @@ runs:
         esac
 
         echo version="$major.$minor.$patch" >> $GITHUB_OUTPUT
-        echo major="$major" >> $GITHUB_OUTPUT
+        echo major=$major >> $GITHUB_OUTPUT
 
     - name: Write new version to Changelog
       uses: corentin-regent/poetrel/write-version@v1
       with:
         changelog: ${{ inputs.changelog }}
-        version: ${{ steps.new-version.outputs.version }}
+        version: ${{ steps.compute-version.outputs.new-version }}
 
     - name: Commit Changelog
       shell: bash
       env:
-        commit_message: ${{ inputs.commit-prefix }}${{ steps.new-version.outputs.version }}
+        commit_message: ${{ inputs.commit-prefix }}${{ steps.compute-version.outputs.new-version }}
       run: |
         git config user.name "${{ inputs.git-user }}"
         git config user.email "${{ inputs.git-email }}"
@@ -109,10 +109,9 @@ runs:
     - name: Update major tag
       shell: bash
       env:
-        new_tag_name: v${{ steps.new-version.outputs.version }}
-        major_tag_name: v${{ steps.new-version.outputs.major }}
+        tag_name: v${{ steps.new-version.outputs.version }}
       run: |
         git fetch origin
-        git checkout $new_tag_name
-        git tag -f -a $major_tag_name -m "Release $major_tag_name"
-        git push origin -f $major_tag_name
+        git checkout $tag_name
+        git tag -f -a $tag_name -m "Release $tag_name"
+        git push origin -f $tag_name
