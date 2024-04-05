@@ -4,10 +4,6 @@ This project adheres to [Semantic Versioning 2.0](http://semver.org/).
 
 ## Unreleased
 
-Nothing changed yet.
-
-## 1.2.1
-
 Fixed the documentation for `poetrel/sync-labels` and `poetrel/release-gh-action`
 
 ## 1.2.0
