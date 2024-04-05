@@ -4,7 +4,7 @@ This project adheres to [Semantic Versioning 2.0](http://semver.org/).
 
 ## Unreleased
 
-Nothing changed yet.
+Replaced `[skip actions]` marker with the shorter `[skip ci]`
 
 ## 1.2.1
 

@@ -38,7 +38,7 @@ jobs:
 
       - name: Bump the project version
         shell: bash
-        run: npm version ${{ steps.get-label.outputs.action }} -m "[skip actions] Bump to %s"
+        run: npm version ${{ steps.get-label.outputs.action }} -m "[skip ci] Bump to %s"
 
       - name: Push version change
         shell: bash

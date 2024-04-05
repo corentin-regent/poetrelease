@@ -44,7 +44,7 @@ jobs:
       - name: Commit changes
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
-          commit_message: '[skip actions] Format codebase'
+          commit_message: '[skip ci] Format codebase'
 
   build:
     name: Build
@@ -76,7 +76,7 @@ jobs:
       - name: Commit dist/
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
-          commit_message: '[skip actions] Build dist/'
+          commit_message: '[skip ci] Build dist/'
           file_pattern: dist/**
 
   test:

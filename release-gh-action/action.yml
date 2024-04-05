@@ -9,7 +9,7 @@ inputs:
   commit-prefix:
     description: The message to display before the version in the commit message
     required: false
-    default: '[skip actions] Release '
+    default: '[skip ci] Release '
   git-author:
     description: Value used for the commit author
     required: false
