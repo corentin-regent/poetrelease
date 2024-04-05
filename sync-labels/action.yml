@@ -27,12 +27,12 @@ runs:
       shell: bash
       # TODO: simply do 'pip install labels' when this PR is merged and released:
       # https://github.com/hackebrot/labels/pull/38
-      run: pip install https://github.com/corentin-regent/labels/archive/sync-multiple.zip
+      run: pip install https://github.com/corentin-regent/labels/archive/main.zip
 
     - name: Fetch Poetrel labels file
       shell: bash
-      run: # TODO: use main branch
-        curl https://raw.githubusercontent.com/corentin-regent/poetrel/sync-labels/labels.toml -o
+      run:
+        curl https://raw.githubusercontent.com/corentin-regent/poetrel/v1/labels.toml -o
         .poetrel_labels.toml
 
     - name: Sync labels with GitHub
