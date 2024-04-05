@@ -30,6 +30,12 @@ jobs:
         with:
           node-version-file: .node-version
 
+      - name: Setup Git
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
       - name: Bump the project version
         shell: bash
         run: npm version ${{ steps.get-label.outputs.action }} -m "[skip actions] Bump to %s"
