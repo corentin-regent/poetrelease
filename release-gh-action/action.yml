@@ -59,19 +59,23 @@ runs:
         major=$(get_part 1)
         minor=$(get_part 2)
         patch=$(get_part 3)
+        echo $major $minor $patch
 
         case "$action" in
           "major")
             ((major++))
             minor=0
             patch=0
+            echo "major" $major
             ;;
           "minor")
             ((minor++))
             patch=0
+            echo minor $minor
             ;;
           "patch")
             ((patch++))
+            echo patch $patch
             ;;
           *)
             echo "Unsupported label 'poetrel:$action'. Please provide 'poetrel:major', 'poetrel:minor', or 'poetrel:patch'."
@@ -79,8 +83,9 @@ runs:
             ;;
         esac
 
+        echo version="$major.$minor.$patch" major="$major" $GITHUB_OUTPUT
         echo version="$major.$minor.$patch" >> $GITHUB_OUTPUT
-        echo major=$major >> $GITHUB_OUTPUT
+        echo major="$major" >> $GITHUB_OUTPUT
 
     - name: Write new version to Changelog
       uses: corentin-regent/poetrel/write-version@v1
