@@ -4,6 +4,10 @@ This project adheres to [Semantic Versioning 2.0](http://semver.org/).
 
 ## Unreleased
 
+No changes yet.
+
+## 1.2.0
+
 ### New Actions
 
 - Added the `poetrel/release-gh-action` action for automatic releases of GitHub actions.
