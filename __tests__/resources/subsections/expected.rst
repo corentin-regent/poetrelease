@@ -4,6 +4,9 @@ My project changelog
 Unreleased
 ----------
 
+1.0.0
+-----
+
 First
 ^^^^^
 
@@ -13,3 +16,8 @@ Second
 ^^^^^^
 
 Another unreleased change
+
+0.0.0
+-----
+
+This is an older version.

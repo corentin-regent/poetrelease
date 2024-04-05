@@ -22,7 +22,11 @@ export default class RstHandler extends BaseHandler {
     return !!nextLine?.match(`^\\${this.sectionDelimiter}+$`)
   }
 
-  protected mkHeader(version: string): string {
+  protected override extractVersion(trimmedLine: string): string {
+    return trimmedLine
+  }
+
+  protected override mkHeader(version: string): string {
     return [version, this.sectionDelimiter.repeat(version.length)].join('\n')
   }
 }

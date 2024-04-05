@@ -32,6 +32,15 @@ export default abstract class Handler {
     return this.mkNotes(notesBuffer)
   }
 
+  public getVersion() {
+    for (const [index, line] of this.iterLines(this.unreleasedSectionStart)) {
+      if (this.isNextSection(line, index)) {
+        return this.extractVersion(line)
+      }
+    }
+    throw new Error(`No existing project version found in ${this.filename}`)
+  }
+
   public writeVersion(version: string) {
     this.lines.splice(this.unreleasedSectionStart, 0, '', this.mkHeader(version))
     writeFileSync(this.filename, this.lines.join('\n'))
@@ -55,6 +64,8 @@ export default abstract class Handler {
   protected abstract isUnreleasedSectionHeading(trimmedLine: string, index: number): boolean
 
   protected abstract isNextSection(trimmedLine: string, index: number): boolean
+
+  protected abstract extractVersion(trimmedLine: string): string
 
   protected abstract mkHeader(version: string): string
 }
