@@ -109,7 +109,7 @@ runs:
     - name: Update major tag
       shell: bash
       env:
-        tag_name: v${{ steps.new-version.outputs.version }}
+        tag_name: v${{ steps.new-version.outputs.major }}
       run: |
         git fetch origin
         git checkout $tag_name
