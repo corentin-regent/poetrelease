@@ -4,7 +4,8 @@ description: Github Action for automatic releases with Poetry
 inputs:
   changelog:
     description: The path to the Changelog file
-    required: true
+    required: false
+    default: CHANGELOG.md
   commit-prefix:
     description: The message to display before the version in the commit message
     required: false

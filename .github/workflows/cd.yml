@@ -41,5 +41,4 @@ jobs:
       - name: Release the GitHub Action
         uses: ./release-gh-action
         with:
-          changelog: CHANGELOG.md
           github-token: ${{ secrets.GITHUB_TOKEN }}

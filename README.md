@@ -67,7 +67,6 @@ jobs:
       - name: Release project
         uses: corentin-regent/poetrel@v1
         with:
-          changelog: CHANGELOG.md
           github-token: ${{ secrets.GITHUB_TOKEN }}
           pypi-token: ${{ secrets.PYPI_TOKEN }}
 ```
@@ -114,7 +113,6 @@ steps:
   - name: Release project
     uses: corentin-regent/poetrel@v1
     with:
-      changelog: CHANGELOG.md
       github-token: ${{ secrets.GITHUB_TOKEN }}
       pypi-token: ${{ secrets.PYPI_TOKEN }}
 ```
@@ -178,7 +176,6 @@ jobs:
       - name: Release the GitHub Action
         uses: ./release-gh-action
         with:
-          changelog: CHANGELOG.md
           github-token: ${{ secrets.GITHUB_TOKEN }}
 ```
 
