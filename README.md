@@ -7,7 +7,11 @@
 Poetrel is a GitHub Action that automates GitHub releases for [Poetry](https://python-poetry.org/)
 projects.
 
-Poetrel also handles publishing the project to PyPI, if provided the `pypi-token` input.
+It can also handle publishing the project to PyPI, if provided the `pypi-token` input.
+
+As a composite action of Javascript actions, any OS is supported.
+
+As a composite action of Javascript actions, any OS is supported.
 
 As a composite action of Javascript actions, any OS is supported.
 
@@ -23,16 +27,15 @@ Poetrel to:
 
 Here are some example labels that you may use:
 
-![poetrel:major](https://img.shields.io/badge/poetrel:major-red)
-![poetrel:prerelease --next-phase](https://img.shields.io/badge/poetrel:prerelease_----next--phase-slateblue)
+![poetrel:major](https://img.shields.io/badge/poetrel:major-ff0000)
+![poetrel:prerelease --next-phase](https://img.shields.io/badge/poetrel:prerelease_----next--phase-007f00)
 
 Supported actions are listed in
 [the Poetry documentation](https://python-poetry.org/docs/cli/#version).
 
 Alternatively, you can specify Poetrel to create a release without updating the `pyproject.toml`
 version, by using the following label:
-
-![poetrel:no-bump](https://img.shields.io/badge/poetrel:no--bump-darkgreen)
+![poetrel:no-bump](https://img.shields.io/badge/poetrel:no--bump-0000ff)
 
 It can be useful if you are preparing the first release of your project for example.
 

@@ -1,0 +1,43 @@
+name: Synchronize Poetrel labels
+description: Synchronize the GitHub labels to add the ones from Poetrel
+
+inputs:
+  github-token:
+    description: The repository token (secrets.GITHUB_TOKEN)
+    required: true
+  labels-file:
+    description: The path to your own labels.toml file
+    required: false
+    default: .github/labels.toml
+  setup-python:
+    description: Whether Poetrel should setup Python
+    required: false
+    default: 'true'
+
+runs:
+  using: composite
+  steps:
+    - name: Set up Python
+      if: ${{ inputs.setup-python == 'true' }}
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.12'
+
+    - name: Install labels
+      shell: bash
+      # TODO: simply do 'pip install labels' when this PR is merged and released:
+      # https://github.com/hackebrot/labels/pull/38
+      run: pip install https://github.com/corentin-regent/labels/archive/main.zip
+
+    - name: Fetch Poetrel labels file
+      shell: bash
+      run:
+        curl https://raw.githubusercontent.com/corentin-regent/poetrel/v1/labels.toml -o
+        .poetrel_labels.toml
+
+    - name: Sync labels with GitHub
+      shell: bash
+      run: |
+        export LABELS_USERNAME="github-actions[bot]"
+        export LABELS_TOKEN="${{ inputs.github-token }}"
+        labels sync -f "${{ inputs.labels-file }}" -f .poetrel_labels.toml
