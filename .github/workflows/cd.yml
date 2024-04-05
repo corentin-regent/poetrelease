@@ -46,7 +46,7 @@ jobs:
 
       - name: Push new tag
         shell: bash
-        run: git push origin "v${{ steps.get-label.outputs.action }}"
+        run: git push --tags
 
       - name: Release the GitHub Action
         uses: ./release-gh-action
