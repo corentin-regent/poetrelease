@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+Nothing changed yet.
+
 ## 1.0.0
 
 ### First

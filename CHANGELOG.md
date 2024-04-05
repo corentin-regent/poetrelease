@@ -11,6 +11,7 @@ This project adheres to [Semantic Versioning 2.0](http://semver.org/).
 
 ### Miscellaneous
 
+- Added a simple message in the `Unreleased` section to reduce conflicts
 - Added a default value for the `changelog` input
 - Stopped using the [git-auto-commit](https://github.com/stefanzweifel/git-auto-commit-action)
   action, to support any OS.

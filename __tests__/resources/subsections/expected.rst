@@ -4,6 +4,8 @@ My project changelog
 Unreleased
 ----------
 
+Nothing changed yet.
+
 1.0.0
 -----
 

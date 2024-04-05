@@ -4,6 +4,8 @@ There might be some additional text here.
 
 ## Unreleased
 
+Nothing changed yet.
+
 ## 1.0.0
 
 - A first unreleased change

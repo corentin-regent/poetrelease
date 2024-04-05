@@ -1,5 +1,7 @@
 import { readFileSync, writeFileSync } from 'fs'
 
+const msgNoChanges = 'Nothing changed yet.'
+
 /**
  * Base class for Changelog handlers
  */
@@ -42,7 +44,7 @@ export default abstract class Handler {
   }
 
   public writeVersion(version: string) {
-    this.lines.splice(this.unreleasedSectionStart, 0, '', this.mkHeader(version))
+    this.lines.splice(this.unreleasedSectionStart, 0, '', msgNoChanges, '', this.mkHeader(version))
     writeFileSync(this.filename, this.lines.join('\n'))
   }
 
