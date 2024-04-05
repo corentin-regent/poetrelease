@@ -109,9 +109,10 @@ runs:
     - name: Update major tag
       shell: bash
       env:
-        tag_name: v${{ steps.new-version.outputs.major }}
+        new_tag_name: v${{ steps.new-version.outputs.version }}
+        major_tag_name: v${{ steps.new-version.outputs.major }}
       run: |
         git fetch origin
-        git checkout $tag_name
-        git tag -f -a $tag_name -m "Release $tag_name"
-        git push origin -f $tag_name
+        git checkout $new_tag_name
+        git tag -f -a $major_tag_name -m "Release $major_tag_name"
+        git push origin -f $major_tag_name
