@@ -181,6 +181,7 @@ jobs:
         uses: ./release-gh-action
         with:
           changelog: CHANGELOG.md
+          github-token: ${{ secrets.GITHUB_TOKEN }}
 ```
 
 See [release-gh-action/action.yml](/release-gh-action/action.yml) for a reference of supported
