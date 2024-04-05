@@ -124,8 +124,8 @@ See the [action.yml](/action.yml) file for a reference of all supported inputs.
 Notably, you can choose to setup Python and Poetry yourself in your workflow, and pass
 `setup-poetry: false` as an argument to Poetrel.
 
-If you wish to override the commit message, make sure to still include `[skip ci]` if you would
-like Poetrel's commit not to trigger additional workflow runs.
+If you wish to override the commit message, make sure to still include `[skip ci]` if you would like
+Poetrel's commit not to trigger additional workflow runs.
 
 ## Automatic releases for a GitHub Action
 
