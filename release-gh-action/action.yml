@@ -36,7 +36,7 @@ runs:
 
     - name: Get old version
       id: old-version
-      uses: corentin-regent/poetrel/get-version@v1
+      uses: corentin-regent/poetrel/get-version@auto-release # TODO: use v1
       with:
         changelog: ${{ inputs.changelog }}
 
