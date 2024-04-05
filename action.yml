@@ -48,7 +48,7 @@ runs:
     - name: Bump project version
       if: ${{ steps.get-label.outputs.action != 'no-bump' }}
       shell: bash
-      run: poetry version ${{ steps.get-label.outputs.action }}
+      run: poetry version "${{ steps.get-label.outputs.action }}"
 
     - name: Get new project version
       id: get-version
@@ -71,7 +71,7 @@ runs:
       if: inputs.pypi-token
       shell: bash
       run: |
-        poetry config pypi-token.pypi ${{ inputs.pypi-token }}
+        poetry config pypi-token.pypi "${{ inputs.pypi-token }}"
         poetry publish --build --no-interaction
 
     - name: Create a GitHub release
