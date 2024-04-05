@@ -1,6 +1,7 @@
 # Poetrel
 
-[![CI](https://github.com/corentin-regent/poetrelease/actions/workflows/ci.yml/badge.svg)](https://github.com/corentin-regent/poetrelease/actions/workflows/ci.yml)
+[![Continuous Integration](https://github.com/corentin-regent/poetrelease/actions/workflows/ci.yml/badge.svg)](https://github.com/corentin-regent/poetrelease/actions/workflows/ci.yml)
+[![Continuous Deployment](https://github.com/corentin-regent/poetrelease/actions/workflows/cd.yml/badge.svg)](https://github.com/corentin-regent/poetrelease/actions/workflows/cd.yml)
 [![MIT License](https://img.shields.io/pypi/l/rate-control?logo=unlicense)](https://github.com/corentin-regent/poetrel/blob/main/LICENSE)
 
 Poetrel is a GitHub Action that automates GitHub releases for [Poetry](https://python-poetry.org/)
@@ -128,3 +129,59 @@ Notably, you can choose to setup Python and Poetry yourself in your workflow, an
 
 If you wish to override the commit message, make sure to still include `[skip actions]` if you would
 like Poetrel's commit not to trigger additional workflow runs.
+
+## Automatic releases for a GitHub Action
+
+Poetrel also offers an action for releasing GitHub Actions, in a similar fashion.
+
+Poetrel will, when merging a pull request with one of the following labels:
+
+![poetrel:major](https://img.shields.io/badge/poetrel:major-ff0000)
+![poetrel:minor](https://img.shields.io/badge/poetrel:minor-ff7f00)
+![poetrel:patch](https://img.shields.io/badge/poetrel:patch-ffff00)
+
+- Infer the current project version from the changelog
+- Bump it accordingly and write the new version in the changelog
+- Create a GitHub release for this new version
+- Create or update the tag for the corresponding major version (e.g. `v1`)
+
+> [!NOTE]  
+> Only the these three labels are supported for this `poetrel/release-gh-action` action.
+
+However, you will still need to create manually the first release of your action, to populate the
+Changelog and list your Action in the
+[GitHub Marketplace](https://github.com/marketplace?type=actions).
+
+[Here](/.github/workflows/cd.yml) is how you can integrate this action in your workflow:
+
+```yaml
+name: Continuous Deployment
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  release:
+    name: Release
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.PAT }}
+
+      - name: Release the GitHub Action
+        uses: ./release-gh-action
+        with:
+          changelog: CHANGELOG.md
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+```
+
+See [release-gh-action/action.yml](/release-gh-action/action.yml) for a reference of supported
+inputs.

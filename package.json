@@ -1,7 +1,7 @@
 {
   "name": "poetrel",
   "description": "Github Action for automatic semantic versioning and releases with Poetry",
-  "version": "1.0.0",
+  "version": "1.1.1",
   "author": "Corentin Régent",
   "homepage": "https://github.com/corentin-regent/poetrel",
   "repository": {
@@ -25,7 +25,7 @@
   "scripts": {
     "format": "npx prettier --write .",
     "package": "bash scripts/package.sh",
-    "test": "npx jest"
+    "test": "npx jest --runInBand"
   },
   "license": "MIT",
   "eslintConfig": {

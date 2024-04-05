@@ -1,12 +1,12 @@
-import { getInput, setFailed } from '@actions/core'
+import { getInput, setFailed, setOutput } from '@actions/core'
 import { mkHandler } from '../handlers'
 
-export default function writeVersion() {
+export default function getVersion() {
   try {
     const changelog = getInput('changelog', { required: true })
-    const version = getInput('version', { required: true })
     const handler = mkHandler(changelog)
-    handler.writeVersion(version)
+    const version = handler.getVersion()
+    setOutput('version', version)
   } catch (error) {
     setFailed(error.message)
   }
