@@ -54,7 +54,7 @@ runs:
         action: ${{ steps.get-label.outputs.action }}
       run: |
         get_part() {
-          echo $old_version | cut -d '.' -f $1
+          echo "$old_version" | cut -d '.' -f $1
         }
         major=$(get_part 1)
         minor=$(get_part 2)
