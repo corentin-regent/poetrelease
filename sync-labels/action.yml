@@ -40,4 +40,4 @@ runs:
       run: |
         export LABELS_USERNAME="github-actions[bot]"
         export LABELS_TOKEN="${{ inputs.github-token }}"
-        labels sync -f ${{ inputs.labels-file }} -f .poetrel_labels.toml
+        labels sync -f "${{ inputs.labels-file }}" -f .poetrel_labels.toml
