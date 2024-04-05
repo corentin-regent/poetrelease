@@ -174,10 +174,60 @@ jobs:
           token: ${{ secrets.PAT }}
 
       - name: Release the GitHub Action
-        uses: ./release-gh-action
+        uses: corentin-regent/poetrel/release-gh-action@v1
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
 ```
 
 See [release-gh-action/action.yml](/release-gh-action/action.yml) for a reference of supported
+inputs.
+
+## Synchronizing the labels in your repo
+
+For the Poetrel labels to be maintainable in your repository, we offer a
+`corentin-regent/poetrel/sync-labels` action, which will synchronize your labels with the ones
+defined [here](/.github/labels.toml).
+
+In order to also keep your existing labels, you will need to list them in a `labels.toml` file in
+your repository. The [labels](https://github.com/hackebrot/labels) package can do this for you.
+
+You will only need to setup a
+[personal access token](https://docs.github.com/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens)
+with `issues: read` permissions, and fill in and run the following commands:
+
+```bash
+pip install labels
+export LABELS_USERNAME="<GITHUB_USERNAME>"
+export LABELS_TOKEN="<PERSONAL_ACCESS_TOKEN>"
+labels fetch -o <REPO_OWNER> -r <REPO_NAME> -f .github/labels.toml
+```
+
+[Here](/.github/workflows/labels.yml) is an example workflow that would then synchronize your labels
+with Poetrel everyday:
+
+```yaml
+name: Synchronize Poetrel labels
+
+on:
+  schedule:
+    - cron: '0 0 * * *' # once a day
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      issues: write
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Sync labels with GitHub
+        uses: corentin-regent/poetrel/sync-labels@v1
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+```
+
+See the [sync-labels/action.yml](/sync-labels/action.yml) file for a reference of all supported
 inputs.
