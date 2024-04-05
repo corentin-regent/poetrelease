@@ -1,64 +1,25 @@
 import { readFileSync } from 'fs'
-import * as core from '@actions/core'
 import saveNotes from '../src/actions/save-notes'
-import { inputFile, iterResourceDir, supportedExtensions } from './helpers'
+import { test } from './helpers'
 
-const getInputMock = jest.spyOn(core, 'getInput')
-const setFailedMock = jest.spyOn(core, 'setFailed').mockImplementation(() => {})
-
-function mockInputs(path: string, extension: string) {
-  getInputMock.mockImplementation(inputName => {
-    if (inputName === 'changelog') {
-      return inputFile(path, extension)
-    }
-    if (inputName === 'notes-file') {
-      return outputNotesPath(path, extension)
-    }
-    fail(`Queried invalid input: ${inputName}`)
-  })
-}
-
-function outputNotesPath(path: string, extension: string) {
+function expectedFile(path: string, extension: string) {
   return `${path}/expected-notes${extension}.txt`
 }
 
-function expectedNotes(path: string, extension: string) {
-  return readFileSync(`${path}/expected-notes${extension}.txt`).toString()
+function outputFile(path: string, extension: string) {
+  return `${path}/output-notes${extension}.txt`
 }
 
-function outputNotes(path: string, extension: string) {
-  return readFileSync(outputNotesPath(path, extension)).toString()
+function assertWorks(path: string, extension: string) {
+  const expectedNotes = readFileSync(expectedFile(path, extension)).toString()
+  const outputNotes = readFileSync(outputFile(path, extension)).toString()
+  expect(outputNotes).toEqual(expectedNotes)
 }
 
-describe('saveNotes', () => {
-  describe('Valid scenarios', () => {
-    iterResourceDir('valid').forEach(scenario => {
-      describe(scenario.name, () => {
-        const path = `${scenario.path}/${scenario.name}`
-        supportedExtensions(path).forEach(extension => {
-          it(`should be able to parse ${extension} files`, async () => {
-            mockInputs(path, extension)
-            await saveNotes()
-            expect(outputNotes(path, extension)).toEqual(expectedNotes(path, extension))
-            expect(setFailedMock).not.toHaveBeenCalled()
-          })
-        })
-      })
-    })
-  })
+function mockedInputs(path: string, extension: string) {
+  return {
+    'notes-file': outputFile(path, extension)
+  }
+}
 
-  describe('Invalid scenarios', () => {
-    iterResourceDir('invalid').forEach(scenario => {
-      describe(scenario.name, () => {
-        const path = `${scenario.path}/${scenario.name}`
-        supportedExtensions(path).forEach(extension => {
-          it(`should fail for ${extension} files`, async () => {
-            mockInputs(path, extension)
-            await saveNotes()
-            expect(setFailedMock).toHaveBeenCalled()
-          })
-        })
-      })
-    })
-  })
-})
+test(saveNotes, expectedFile, assertWorks, mockedInputs)

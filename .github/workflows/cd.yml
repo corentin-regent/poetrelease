@@ -1,0 +1,44 @@
+name: Continuous Deployment
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  release:
+    name: Release
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.PAT }}
+
+      - name: Get pull request label
+        id: get-label
+        uses: corentin-regent/poetrel/get-label@v1
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: .node-version
+
+      - name: Bump the project version
+        shell: bash
+        run: npm version ${{ steps.get-label.outputs.action }} -m "[skip actions] Bump to %s"
+
+      - name: Push version change
+        shell: bash
+        run: git push
+
+      - name: Release the GitHub Action
+        uses: ./release-gh-action
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}

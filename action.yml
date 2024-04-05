@@ -4,11 +4,24 @@ description: Github Action for automatic releases with Poetry
 inputs:
   changelog:
     description: The path to the Changelog file
-    required: true
+    required: false
+    default: CHANGELOG.md
   commit-prefix:
     description: The message to display before the version in the commit message
     required: false
     default: '[skip actions] Release '
+  git-author:
+    description: Value used for the commit author
+    required: false
+    default: ${{ github.actor }} <${{ github.actor }}@users.noreply.github.com>
+  git-email:
+    description: Email address used for the commit user
+    required: false
+    default: 41898282+github-actions[bot]@users.noreply.github.com
+  git-user:
+    description: Name used for the commit user
+    required: false
+    default: github-actions[bot]
   github-token:
     description: The repository token (secrets.GITHUB_TOKEN)
     required: true
@@ -39,7 +52,7 @@ runs:
       if: ${{ inputs.setup-poetry == 'true' }}
       uses: actions/setup-python@v5
       with:
-        python-version: '3.12'
+        python-version: 3.x
 
     - name: Install Poetry
       if: ${{ inputs.setup-poetry == 'true' }}
@@ -48,7 +61,7 @@ runs:
     - name: Bump project version
       if: ${{ steps.get-label.outputs.action != 'no-bump' }}
       shell: bash
-      run: poetry version ${{ steps.get-label.outputs.action }}
+      run: poetry version "${{ steps.get-label.outputs.action }}"
 
     - name: Get new project version
       id: get-version
@@ -62,16 +75,21 @@ runs:
         version: ${{ steps.get-version.outputs.new-version }}
 
     - name: Commit changes
-      uses: stefanzweifel/git-auto-commit-action@v5
-      with:
-        commit_message: ${{ inputs.commit-prefix }}${{ steps.get-version.outputs.new-version }}
-        file_pattern: ${{ inputs.changelog }} pyproject.toml
+      shell: bash
+      env:
+        commit-message: ${{ inputs.commit-prefix }}${{ steps.get-version.outputs.new-version }}
+      run: |
+        git config user.name "${{ inputs.git-user }}"
+        git config user.email "${{ inputs.git-email }}"
+        git add "${{ inputs.changelog }}" pyproject.toml
+        git commit -m "${{ env.commit-message }}" --author "${{ inputs.git-author }}"
+        git push
 
     - name: Publish to PyPI
       if: inputs.pypi-token
       shell: bash
       run: |
-        poetry config pypi-token.pypi ${{ inputs.pypi-token }}
+        poetry config pypi-token.pypi "${{ inputs.pypi-token }}"
         poetry publish --build --no-interaction
 
     - name: Create a GitHub release
