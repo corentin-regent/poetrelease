@@ -3,8 +3,9 @@ description: Create a GitHub Release
 
 inputs:
   github-token:
-    description: The repository token (secrets.GITHUB_TOKEN)
-    required: true
+    description: GitHub token used to create the release
+    default: ${{ github.token }}
+    required: false
   notes-file:
     description: The path to the release notes file
     required: true

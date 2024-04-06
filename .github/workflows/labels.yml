@@ -17,5 +17,3 @@ jobs:
 
       - name: Sync labels with GitHub
         uses: ./sync-labels
-        with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
