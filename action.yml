@@ -23,8 +23,9 @@ inputs:
     required: false
     default: github-actions[bot]
   github-token:
-    description: The repository token (secrets.GITHUB_TOKEN)
-    required: true
+    description: GitHub token used to read the PR labels and create the release
+    default: ${{ github.token }}
+    required: false
   pypi-token:
     description: The PyPI API token if you want to publish to PyPI
     required: false

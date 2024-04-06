@@ -21,9 +21,7 @@ jobs:
 
       - name: Get pull request label
         id: get-label
-        uses: corentin-regent/poetrel/get-label@v1
-        with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
+        uses: ./get-label
 
       - name: Setup Node
         uses: actions/setup-node@v4
@@ -50,5 +48,3 @@ jobs:
 
       - name: Release the GitHub Action
         uses: ./release-gh-action
-        with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}

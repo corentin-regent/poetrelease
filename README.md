@@ -67,15 +67,11 @@ jobs:
       - name: Release project
         uses: corentin-regent/poetrel@v1
         with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
           pypi-token: ${{ secrets.PYPI_TOKEN }}
 ```
 
 The `PYPI_TOKEN` secret can be generated [here](https://pypi.org/manage/account/#api-tokens) for
 your project and has to be added to your repository secrets in the GitHub settings.
-
-The `GITHUB_TOKEN` secret on the other hand is builtin, and is provided by GitHub without any action
-required.
 
 ## Changelog format
 
@@ -113,7 +109,6 @@ steps:
   - name: Release project
     uses: corentin-regent/poetrel@v1
     with:
-      github-token: ${{ secrets.GITHUB_TOKEN }}
       pypi-token: ${{ secrets.PYPI_TOKEN }}
 ```
 
@@ -175,8 +170,6 @@ jobs:
 
       - name: Release the GitHub Action
         uses: corentin-regent/poetrel/release-gh-action@v1
-        with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
 ```
 
 See [release-gh-action/action.yml](/release-gh-action/action.yml) for a reference of supported
@@ -225,8 +218,6 @@ jobs:
 
       - name: Sync labels with GitHub
         uses: corentin-regent/poetrel/sync-labels@v1
-        with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
 ```
 
 See the [sync-labels/action.yml](/sync-labels/action.yml) file for a reference of all supported

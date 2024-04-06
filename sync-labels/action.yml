@@ -3,8 +3,9 @@ description: Synchronize the GitHub labels to add the ones from Poetrel
 
 inputs:
   github-token:
-    description: The repository token (secrets.GITHUB_TOKEN)
-    required: true
+    description: GitHub token used to sync the labels with the repository
+    default: ${{ github.token }}
+    required: false
   labels-file:
     description: The path to your own labels.toml file
     required: false

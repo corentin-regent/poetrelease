@@ -3,8 +3,9 @@ description: Extract the label of the pull request, if any matches
 
 inputs:
   github-token:
-    description: The repository token (secrets.GITHUB_TOKEN)
-    required: true
+    description: GitHub token used to read the labels from the PR that the commit originated from
+    default: ${{ github.token }}
+    required: false
 
 outputs:
   action:
