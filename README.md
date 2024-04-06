@@ -1,7 +1,8 @@
 # Poetrel
 
-[![Continuous Integration](https://github.com/corentin-regent/poetrelease/actions/workflows/ci.yml/badge.svg)](https://github.com/corentin-regent/poetrelease/actions/workflows/ci.yml)
-[![Continuous Deployment](https://github.com/corentin-regent/poetrelease/actions/workflows/cd.yml/badge.svg)](https://github.com/corentin-regent/poetrelease/actions/workflows/cd.yml)
+[![Continuous Integration](https://github.com/corentin-regent/poetrel/actions/workflows/ci.yml/badge.svg)](https://github.com/corentin-regent/poetrel/actions/workflows/ci.yml)
+[![Continuous Deployment](https://github.com/corentin-regent/poetrel/actions/workflows/cd.yml/badge.svg)](https://github.com/corentin-regent/poetrel/actions/workflows/cd.yml)
+[![Latest Release](https://img.shields.io/github/v/release/corentin-regent/poetrel?logo=github&sort=semver)](https://github.com/corentin-regent/poetrel/releases)
 [![MIT License](https://img.shields.io/pypi/l/rate-control?logo=unlicense)](https://github.com/corentin-regent/poetrel/blob/main/LICENSE)
 
 Poetrel is a GitHub Action that automates GitHub releases for [Poetry](https://python-poetry.org/)
