@@ -4,6 +4,10 @@ This project adheres to [Semantic Versioning 2.0](http://semver.org/).
 
 ## Unreleased
 
+Nothing changed yet.
+
+## 1.4.0
+
 Added the default value of `github.token` for the `github-token` inputs of all actions
 
 ## 1.3.0
