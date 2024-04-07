@@ -1,7 +1,7 @@
 {
   "name": "poetrel",
   "description": "Github Action for automatic semantic versioning and releases with Poetry",
-  "version": "1.4.0",
+  "version": "1.4.1",
   "author": "Corentin Régent",
   "homepage": "https://github.com/corentin-regent/poetrel",
   "repository": {
