@@ -59,6 +59,11 @@ jobs:
       # and push the updated Changelog and pyproject.toml
       contents: write
 
+    concurrency: pypi
+    environment:
+      name: pypi
+      url: https://pypi.org/project/<YOUR_PROJECT_NAME>/
+
     steps:
       - name: Checkout project
         uses: actions/checkout@v4
@@ -145,7 +150,7 @@ However, you will still need to create manually the first release of your action
 Changelog and list your Action in the
 [GitHub Marketplace](https://github.com/marketplace?type=actions).
 
-[Here](/.github/workflows/cd.yml) is how you can integrate this action in your workflow:
+Here is how you can integrate this action in your workflow:
 
 ```yaml
 name: Continuous Deployment
@@ -161,6 +166,10 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: write
+    concurrency: github-marketplace
+    environment:
+      name: github-marketplace
+      url: https://github.com/marketplace/actions/<YOUR_ACTION_NAME>
 
     steps:
       - name: Check out repository

@@ -4,7 +4,8 @@ This project adheres to [Semantic Versioning 2.0](http://semver.org/).
 
 ## Unreleased
 
-Nothing changed yet.
+Added [GitHub Deployments](https://docs.github.com/en/actions/deployment/about-deployments) with
+`environment` and `concurrency` in the docs examples.
 
 ## 1.4.0
 
