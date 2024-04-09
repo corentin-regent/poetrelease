@@ -221,6 +221,7 @@ on:
 
 jobs:
   sync:
+    name: Synchronize Poetrel labels
     runs-on: ubuntu-latest
     permissions:
       contents: read
