@@ -28,5 +28,5 @@ export default class MdHandler extends BaseHandler {
 }
 
 function countHeadings(line: string) {
-  return /^#+\s/.test(line) ? /^#+/.exec(line)![0].length : 0
+  return /^#+\s/.test(line) ? /^#+/.exec(line)[0].length : 0
 }

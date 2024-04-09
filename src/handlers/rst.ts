@@ -19,7 +19,7 @@ export default class RstHandler extends BaseHandler {
 
   protected override isNextSection(_: string, index: number) {
     const nextLine = this.lines[index + this.unreleasedSectionStart + 1]
-    return !!nextLine?.match(`^\\${this.sectionDelimiter}+$`)
+    return !!nextLine?.match(`^\\${this.sectionDelimiter}+$`) // NOSONAR
   }
 
   protected override extractVersion(trimmedLine: string): string {

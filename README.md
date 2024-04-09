@@ -5,6 +5,11 @@
 [![Latest Release](https://img.shields.io/github/v/release/corentin-regent/poetrel?logo=github&sort=semver)](https://github.com/corentin-regent/poetrel/releases)
 [![MIT License](https://img.shields.io/pypi/l/rate-control?logo=unlicense)](https://github.com/corentin-regent/poetrel/blob/main/LICENSE)
 
+[![Quality Gate](https://sonarcloud.io/api/project_badges/measure?project=corentin-regent_poetrel&metric=alert_status)](https://sonarcloud.io/summary/overall?id=corentin-regent_poetrel)
+[![Maintainability](https://sonarcloud.io/api/project_badges/measure?project=corentin-regent_poetrel&metric=sqale_rating)](https://sonarcloud.io/summary/overall?id=corentin-regent_poetrel)
+[![Reliability](https://sonarcloud.io/api/project_badges/measure?project=corentin-regent_poetrel&metric=reliability_rating)](https://sonarcloud.io/summary/overall?id=corentin-regent_poetrel)
+[![Security](https://sonarcloud.io/api/project_badges/measure?project=corentin-regent_poetrel&metric=security_rating)](https://sonarcloud.io/summary/overall?id=corentin-regent_poetrel)
+
 Poetrel is a GitHub Action that automates GitHub releases for [Poetry](https://python-poetry.org/)
 projects.
 
@@ -189,7 +194,7 @@ inputs.
 
 For the Poetrel labels to be maintainable in your repository, we offer a
 `corentin-regent/poetrel/sync-labels` action, which will synchronize your labels with the ones
-defined [here](/.github/labels.toml).
+defined [here](/sync-labels/labels.toml).
 
 In order to also keep your existing labels, you will need to list them in a `labels.toml` file in
 your repository. The [labels](https://github.com/hackebrot/labels) package can do this for you.
@@ -205,8 +210,7 @@ export LABELS_TOKEN="<PERSONAL_ACCESS_TOKEN>"
 labels fetch -o <REPO_OWNER> -r <REPO_NAME> -f .github/labels.toml
 ```
 
-[Here](/.github/workflows/labels.yml) is an example workflow that would then synchronize your labels
-with Poetrel everyday:
+Here is an example workflow that would then synchronize your labels with Poetrel everyday:
 
 ```yaml
 name: Synchronize Poetrel labels
@@ -217,6 +221,7 @@ on:
 
 jobs:
   sync:
+    name: Synchronize Poetrel labels
     runs-on: ubuntu-latest
     permissions:
       contents: read

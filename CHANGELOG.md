@@ -4,7 +4,8 @@ This project adheres to [Semantic Versioning 2.0](http://semver.org/).
 
 ## Unreleased
 
-Nothing changed yet.
+Removed unnecessary `curl` to get the Poetrel `labels.toml` file, now reference it directly using
+`$GITHUB_ACTION_PATH`.
 
 ## 1.4.1
 
