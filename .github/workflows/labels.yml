@@ -1,4 +1,4 @@
-name: Synchronize Poetrel labels
+name: Synchronize labels
 
 on:
   push:
@@ -8,7 +8,7 @@ on:
 
 jobs:
   sync:
-    name: Synchronize Poetrel labels
+    name: Synchronize labels
     runs-on: ubuntu-latest
     permissions:
       contents: read
