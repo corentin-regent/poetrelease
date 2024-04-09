@@ -5,6 +5,11 @@
 [![Latest Release](https://img.shields.io/github/v/release/corentin-regent/poetrel?logo=github&sort=semver)](https://github.com/corentin-regent/poetrel/releases)
 [![MIT License](https://img.shields.io/pypi/l/rate-control?logo=unlicense)](https://github.com/corentin-regent/poetrel/blob/main/LICENSE)
 
+[![Quality Gate](https://sonarcloud.io/api/project_badges/measure?project=corentin-regent_poetrel&metric=alert_status)](https://sonarcloud.io/summary/overall?id=corentin-regent_poetrel)
+[![Maintainability](https://sonarcloud.io/api/project_badges/measure?project=corentin-regent_poetrel&metric=sqale_rating)](https://sonarcloud.io/summary/overall?id=corentin-regent_poetrel)
+[![Reliability](https://sonarcloud.io/api/project_badges/measure?project=corentin-regent_poetrel&metric=reliability_rating)](https://sonarcloud.io/summary/overall?id=corentin-regent_poetrel)
+[![Security](https://sonarcloud.io/api/project_badges/measure?project=corentin-regent_poetrel&metric=security_rating)](https://sonarcloud.io/summary/overall?id=corentin-regent_poetrel)
+
 Poetrel is a GitHub Action that automates GitHub releases for [Poetry](https://python-poetry.org/)
 projects.
 
