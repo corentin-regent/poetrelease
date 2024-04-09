@@ -1,8 +1,10 @@
 name: Synchronize Poetrel labels
 
 on:
-  schedule:
-    - cron: '0 0 * * *' # once a day
+  push:
+    paths:
+      - '.github/workflows/labels.yml'
+      - 'sync-labels/**'
 
 jobs:
   sync:

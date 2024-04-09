@@ -194,7 +194,7 @@ inputs.
 
 For the Poetrel labels to be maintainable in your repository, we offer a
 `corentin-regent/poetrel/sync-labels` action, which will synchronize your labels with the ones
-defined [here](/.github/labels.toml).
+defined [here](/sync-labels/labels.toml).
 
 In order to also keep your existing labels, you will need to list them in a `labels.toml` file in
 your repository. The [labels](https://github.com/hackebrot/labels) package can do this for you.
@@ -210,8 +210,7 @@ export LABELS_TOKEN="<PERSONAL_ACCESS_TOKEN>"
 labels fetch -o <REPO_OWNER> -r <REPO_NAME> -f .github/labels.toml
 ```
 
-[Here](/.github/workflows/labels.yml) is an example workflow that would then synchronize your labels
-with Poetrel everyday:
+Here is an example workflow that would then synchronize your labels with Poetrel everyday:
 
 ```yaml
 name: Synchronize Poetrel labels
