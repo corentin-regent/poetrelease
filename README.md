@@ -210,14 +210,18 @@ export LABELS_TOKEN="<PERSONAL_ACCESS_TOKEN>"
 labels fetch -o <REPO_OWNER> -r <REPO_NAME> -f .github/labels.toml
 ```
 
-Here is an example workflow that would then synchronize your labels with Poetrel everyday:
+Here is an example workflow that would then synchronize your labels with Poetrel every time the
+workflow is changed (e.g. when first created, and when a new Poetrel major version is used):
 
 ```yaml
 name: Synchronize Poetrel labels
 
 on:
-  schedule:
-    - cron: '0 0 * * *' # once a day
+  push:
+    branches:
+      - main
+    paths:
+      - '.github/workflows/labels.yml' # the path to your workflow file (can be different)
 
 jobs:
   sync:
